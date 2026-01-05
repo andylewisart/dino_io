@@ -1288,6 +1288,9 @@ class Entity {
     }
 
     takeDamage(amount, source, type) {
+        // 1. Friendly Fire Check
+        if (source && source.team && this.team && source.team === this.team && source !== this) return;
+
         let finalDamage = amount;
         let isResisted = false;
         let isEffective = false;
@@ -1322,14 +1325,26 @@ class Entity {
         
         // Audio: Only play hit sound if player is involved to prevent spam
         if (this.health > 0) {
-            if (this.isPlayer || (source && source.isPlayer)) {
+            if ((this.isPlayer) || (source && source.isPlayer)) {
                 AudioSys.hit();
             }
         }
         
         if (this.health <= 0 && !this.dead) {
             this.dead = true;
-            if (source && source instanceof Dino && source.isPlayer) source.gainXp(this.xpValue || 10);
+            
+            // 2. XP Sharing (Squad)
+            if (source && source instanceof Dino) {
+                if (source.isPlayer) {
+                    source.gainXp(this.xpValue || 10);
+                } else if (source.team === player.team) {
+                    // Squad Kill: Player gets full XP
+                    player.gainXp(this.xpValue || 10);
+                    // Optional: Squad member also gets XP?
+                    source.gainXp((this.xpValue || 10) * 0.5); 
+                }
+            }
+            
             this.onDeath(source);
         }
     }
@@ -2240,7 +2255,12 @@ class Dino extends Entity {
             entities.push(b);
         });
         
-        if (shotFired && this.isPlayer && this.guns.length > 0) AudioSys.shoot(this.guns[0].type);
+        // Audio: Only play for Player or Boss to reduce noise
+        if (shotFired && this.guns.length > 0) {
+            if (this.isPlayer || this.isBoss) {
+                AudioSys.shoot(this.guns[0].type);
+            }
+        }
     }
 
     draw(ctx) {
