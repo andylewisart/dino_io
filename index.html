@@ -1319,7 +1319,13 @@ class Entity {
         if (isEffective) { color = '#f55'; size = 16; }
         
         spawnDamageNumber(this.x, this.y, Math.round(finalDamage), color, size);
-        if (this.health > 0) AudioSys.hit();
+        
+        // Audio: Only play hit sound if player is involved to prevent spam
+        if (this.health > 0) {
+            if (this.isPlayer || (source && source.isPlayer)) {
+                AudioSys.hit();
+            }
+        }
         
         if (this.health <= 0 && !this.dead) {
             this.dead = true;
