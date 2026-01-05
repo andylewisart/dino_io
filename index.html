@@ -4066,7 +4066,11 @@ function spawnPowerUp() {
 
 function createExplosion(x, y, damage, radius, source) {
     explosions.push(new ExplosionEffect(x, y, radius));
-    AudioSys.explode();
+    
+    // Audio: Only play explosion sound for Player or Boss to reduce noise
+    if (source && (source.isPlayer || source.isBoss)) {
+        AudioSys.explode();
+    }
     
     for(let i=0; i<15; i++) {
         particles.push(new Particle(x, y, '#ff4500'));
