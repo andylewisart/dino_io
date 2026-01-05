@@ -1733,7 +1733,11 @@ class Dino extends Entity {
         } else if (this.level >= 30) {
             const opts = Object.keys(CLASS_DEFS).filter(k => CLASS_DEFS[k].tier === 2);
             this.evolve(opts[Math.floor(Math.random() * opts.length)]);
-        } else if (this.level >= 15) {
+        } else {
+            // Level 1-29: Chance to be Tier 1 (Diversity)
+            // 30% chance to stay Baby Dino, 70% chance to be a Tier 1 species
+            if (Math.random() < 0.3 && this.level < 15) return; 
+            
             const opts = Object.keys(CLASS_DEFS).filter(k => CLASS_DEFS[k].tier === 1);
             this.evolve(opts[Math.floor(Math.random() * opts.length)]);
         }
@@ -3884,60 +3888,88 @@ function spawnEnemy() {
 
     if (!valid) return;
 
-    const enemy = new Dino(x, y, false);
+    // Pack Spawning Logic
+    const isPack = Math.random() < 0.20; // 20% chance for a pack
+    const count = isPack ? Math.floor(rand(3, 6)) : 1;
     
+    // Determine species/level once for the whole pack
     const enemyCfg = stageState?.def?.enemy || {};
     const levelOffset = enemyCfg.levelOffset || 0;
     const baseLevel = (player?.level || 1) + levelOffset;
     const minLvl = Math.max(1, Math.floor(baseLevel + (enemyCfg.minDelta ?? -1)));
     const maxLvl = Math.max(minLvl, Math.floor(baseLevel + (enemyCfg.maxDelta ?? 1)));
-    enemy.level = Math.floor(rand(minLvl, maxLvl + 1));
+    const packLevel = Math.floor(rand(minLvl, maxLvl + 1));
+
+    // Pre-calculate species so they match
+    // We create a temp dino just to resolve the species logic effectively, or we can just force it.
+    // Easier way: Create first one, get its species, then force others.
     
-    enemy.evolve("Baby Dino"); 
-    enemy.assignAIClass(); 
-    
-    const traitChance = enemyCfg.traitChance ?? 0.35;
-    if (Math.random() < traitChance) {
-        const r = Math.random();
-        if (r < 0.25) enemy.trait = 'armored';
-        else if (r < 0.5) enemy.trait = 'evasive';
-        else if (r < 0.75) enemy.trait = 'ablative';
-        else enemy.trait = 'spiked';
-    } else {
-        enemy.trait = null;
+    let packSpecies = null;
+
+    for (let i = 0; i < count; i++) {
+        let ex = x, ey = y;
+        if (i > 0) {
+            ex += rand(-150, 150);
+            ey += rand(-150, 150);
+            ex = clamp(ex, 120, CONFIG.mapWidth - 120);
+            ey = clamp(ey, 120, CONFIG.mapHeight - 120);
+        }
+
+        const enemy = new Dino(ex, ey, false);
+        enemy.level = packLevel;
+        
+        enemy.evolve("Baby Dino"); 
+        
+        if (i === 0) {
+            enemy.assignAIClass();
+            packSpecies = enemy.className;
+        } else if (packSpecies) {
+            enemy.evolve(packSpecies);
+        }
+        
+        const traitChance = enemyCfg.traitChance ?? 0.35;
+        if (Math.random() < traitChance) {
+            const r = Math.random();
+            if (r < 0.25) enemy.trait = 'armored';
+            else if (r < 0.5) enemy.trait = 'evasive';
+            else if (r < 0.75) enemy.trait = 'ablative';
+            else enemy.trait = 'spiked';
+        } else {
+            enemy.trait = null;
+        }
+
+        const rangedChance = enemyCfg.rangedChance ?? 0.2;
+        const isRanged = Math.random() < rangedChance;
+        
+        if (!isRanged) {
+            enemy.behavior = 'melee';
+            enemy.guns = []; 
+        } else {
+            enemy.behavior = 'ranged';
+        }
+
+        const statsDiv = enemyCfg.statsDiv ?? 3;
+        for(let k=0; k<8; k++) enemy.stats[k] = rand(0, enemy.level / statsDiv);
+        
+        enemy.recalcStats();
+
+        // Apply behavior + stage tuning after stat recompute
+        if (!isRanged) {
+            enemy.bodyDamage *= 1.25;
+            enemy.moveSpeed *= 1.08;
+        }
+
+        const healthMult = enemyCfg.healthMult ?? 1.0;
+        const damageMult = enemyCfg.damageMult ?? 1.0;
+        const moveSpeedMult = enemyCfg.moveSpeedMult ?? 1.0;
+        enemy.maxHealth *= healthMult;
+        enemy.health = enemy.maxHealth;
+        enemy.bodyDamage *= damageMult;
+        enemy.bulletDmg *= damageMult;
+        enemy.moveSpeed *= moveSpeedMult;
+
+        entities.push(enemy);
     }
-
-    const rangedChance = enemyCfg.rangedChance ?? 0.2;
-    const isRanged = Math.random() < rangedChance;
-    
-    if (!isRanged) {
-        enemy.behavior = 'melee';
-        enemy.guns = []; 
-    } else {
-        enemy.behavior = 'ranged';
-    }
-
-    const statsDiv = enemyCfg.statsDiv ?? 3;
-    for(let i=0; i<8; i++) enemy.stats[i] = rand(0, enemy.level / statsDiv);
-    
-    enemy.recalcStats();
-
-    // Apply behavior + stage tuning after stat recompute
-    if (!isRanged) {
-        enemy.bodyDamage *= 1.25;
-        enemy.moveSpeed *= 1.08;
-    }
-
-    const healthMult = enemyCfg.healthMult ?? 1.0;
-    const damageMult = enemyCfg.damageMult ?? 1.0;
-    const moveSpeedMult = enemyCfg.moveSpeedMult ?? 1.0;
-    enemy.maxHealth *= healthMult;
-    enemy.health = enemy.maxHealth;
-    enemy.bodyDamage *= damageMult;
-    enemy.bulletDmg *= damageMult;
-    enemy.moveSpeed *= moveSpeedMult;
-
-    entities.push(enemy);
 }
 
 function spawnBoss(x, y) {
@@ -4247,9 +4279,9 @@ function update(dt) {
         const desiredShapes = stageState?.def.spawn?.desiredShapes ?? 650;
         if (entities.filter(e => e instanceof Shape).length < desiredShapes) spawnShape();
 
-        const maxEnemiesBase = stageState?.def.spawn?.maxEnemiesBase ?? 16;
-        const maxEnemiesPerLevel = stageState?.def.spawn?.maxEnemiesPerLevel ?? 0.35;
-        const maxEnemies = Math.max(4, Math.floor(maxEnemiesBase + (player.level * maxEnemiesPerLevel)));
+        const maxEnemiesBase = 50;
+        const maxEnemiesPerLevel = stageState?.def.spawn?.maxEnemiesPerLevel ?? 0.5;
+        const maxEnemies = Math.max(10, Math.floor(maxEnemiesBase + (player.level * maxEnemiesPerLevel)));
         if (entities.filter(e => e instanceof Dino && !e.isPlayer && !e.isBoss).length < maxEnemies) spawnEnemy();
     }
 
