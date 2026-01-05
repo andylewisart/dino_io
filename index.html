@@ -1020,21 +1020,21 @@ const STAT_ICONS = [
 ];
 
 const CLASS_DEFS = {
-    'Baby Dino': { tier: 0, scale: 1.0, guns: [{a:0, x:0, y:0, w:0.4, h:1.2, type:'standard'}] },
-    'Raptor':      { tier: 1, label: "Twin", scale: 1.1, guns: [{a:0, x:0, y:-0.4, w:0.4, h:1.3, type:'standard'}, {a:0, x:0, y:0.4, w:0.4, h:1.3, type:'standard'}] }, 
-    'Dilophosaur': { tier: 1, label: "Flamer", scale: 1.1, guns: [{a:0, x:0, y:0, w:0.5, h:1.0, type:'flame'}] }, 
-    'Stegosaurus': { tier: 1, label: "Launcher", scale: 1.1, guns: [{a:0, x:0, y:0, w:0.6, h:1.2, type:'bomb'}] }, 
-    'Pterodactyl': { tier: 1, label: "Railgun", scale: 1.1, fov: 1.3, guns: [{a:0, x:0.2, y:0, w:0.45, h:1.8, type:'laser'}] }, 
-    'Triceratops': { tier: 2, label: "Triple Shot", scale: 1.3, guns: [{a:0, x:0, y:0, w:0.4, h:1.3, type:'standard'}, {a:-0.3, x:0, y:0, w:0.4, h:1.2, type:'standard'}, {a:0.3, x:0, y:0, w:0.4, h:1.2, type:'standard'}] },
+    'Baby Dino': { tier: 0, scale: 0.6, guns: [{a:0, x:0, y:0, w:0.4, h:1.2, type:'standard'}] },
+    'Raptor':      { tier: 1, label: "Twin", scale: 0.85, guns: [{a:0, x:0, y:-0.4, w:0.4, h:1.3, type:'standard'}, {a:0, x:0, y:0.4, w:0.4, h:1.3, type:'standard'}] }, 
+    'Dilophosaur': { tier: 1, label: "Flamer", scale: 0.9, guns: [{a:0, x:0, y:0, w:0.5, h:1.0, type:'flame'}] }, 
+    'Stegosaurus': { tier: 1, label: "Launcher", scale: 1.0, guns: [{a:0, x:0, y:0, w:0.6, h:1.2, type:'bomb'}] }, 
+    'Pterodactyl': { tier: 1, label: "Railgun", scale: 0.9, fov: 1.3, guns: [{a:0, x:0.2, y:0, w:0.45, h:1.8, type:'laser'}] }, 
+    'Triceratops': { tier: 2, label: "Triple Shot", scale: 1.2, guns: [{a:0, x:0, y:0, w:0.4, h:1.3, type:'standard'}, {a:-0.3, x:0, y:0, w:0.4, h:1.2, type:'standard'}, {a:0.3, x:0, y:0, w:0.4, h:1.2, type:'standard'}] },
     'Giganotosaurus':{ tier: 2, label: "Inferno", scale: 1.3, guns: [{a:0, x:0, y:-0.3, w:0.3, h:1.1, type:'flame'}, {a:0, x:0, y:0.3, w:0.3, h:1.1, type:'flame'}] },
-    'Spinosaurus':   { tier: 2, label: "Cluster Bomb", scale: 1.4, guns: [{a:0, x:0.2, y:-0.4, w:0.8, h:1.4, type:'bomb'}, {a:0, x:0.2, y:0.4, w:0.8, h:1.4, type:'bomb'}] },
-    'Archaeopteryx': { tier: 2, label: "Twin Rail", scale: 1.3, fov: 1.5, guns: [{a:0, x:0.2, y:-0.3, w:0.45, h:1.8, type:'laser'}, {a:0, x:0.2, y:0.3, w:0.45, h:1.8, type:'laser'}] },
+    'Spinosaurus':   { tier: 2, label: "Cluster Bomb", scale: 1.3, guns: [{a:0, x:0.2, y:-0.4, w:0.8, h:1.4, type:'bomb'}, {a:0, x:0.2, y:0.4, w:0.8, h:1.4, type:'bomb'}] },
+    'Archaeopteryx': { tier: 2, label: "Twin Rail", scale: 1.1, fov: 1.5, guns: [{a:0, x:0.2, y:-0.3, w:0.45, h:1.8, type:'laser'}, {a:0, x:0.2, y:0.3, w:0.45, h:1.8, type:'laser'}] },
 
     // Tier 3 (Lvl 45)
-    'Titanosaur':    { tier: 3, label: "Octo-Cannon", scale: 1.6, guns: [0,1,2,3,4,5,6,7].map(i => ({a:i*(Math.PI/4), x:0, y:0, w:0.4, h:1.2, type:'standard'})) },
-    'Indominus':     { tier: 3, label: "Hydra Flame", scale: 1.5, guns: [{a:0, x:0, y:0, w:0.4, h:1.2, type:'flame'}, {a:-0.2, x:0, y:0, w:0.4, h:1.2, type:'flame'}, {a:0.2, x:0, y:0, w:0.4, h:1.2, type:'flame'}] },
-    'T-Rex':         { tier: 3, label: "Czar Nuke", scale: 1.8, guns: [{a:0, x:0.3, y:0, w:1.5, h:2.0, type:'bomb'}] }, 
-    'Velociraptor':  { tier: 3, label: "Quad Beam", scale: 1.4, fov: 1.7, guns: [{a:0, x:0, y:-0.6, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:-0.2, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:0.2, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:0.6, w:0.4, h:1.8, type:'laser'}] }
+    'Titanosaur':    { tier: 3, label: "Octo-Cannon", scale: 1.8, guns: [0,1,2,3,4,5,6,7].map(i => ({a:i*(Math.PI/4), x:0, y:0, w:0.4, h:1.2, type:'standard'})) },
+    'Indominus':     { tier: 3, label: "Hydra Flame", scale: 1.6, guns: [{a:0, x:0, y:0, w:0.4, h:1.2, type:'flame'}, {a:-0.2, x:0, y:0, w:0.4, h:1.2, type:'flame'}, {a:0.2, x:0, y:0, w:0.4, h:1.2, type:'flame'}] },
+    'T-Rex':         { tier: 3, label: "Czar Nuke", scale: 1.7, guns: [{a:0, x:0.3, y:0, w:1.5, h:2.0, type:'bomb'}] }, 
+    'Velociraptor':  { tier: 3, label: "Quad Beam", scale: 1.2, fov: 1.7, guns: [{a:0, x:0, y:-0.6, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:-0.2, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:0.2, w:0.4, h:1.8, type:'laser'}, {a:0, x:0, y:0.6, w:0.4, h:1.8, type:'laser'}] }
 };
 
 const UPGRADE_TREE = {
@@ -1094,10 +1094,10 @@ const STAGE_DEFS = [
         spawn: {
             initialShapes: 520,
             initialPowerUps: 18,
-            initialEnemies: 4,
+            initialEnemies: 6,
             desiredShapes: 620,
-            maxEnemiesBase: 6,
-            maxEnemiesPerLevel: 0.35,
+            maxEnemiesBase: 12,
+            maxEnemiesPerLevel: 0.45,
             startInvulnerable: 2.5,
         },
         enemy: {
@@ -1116,18 +1116,18 @@ const STAGE_DEFS = [
         minimapReveal: { jewel: 800, gate: 900 },
         difficultyOffset: 0,
         mosasaur: {
-            entryChance: 0.28,
-            lingerTime: 14.0,
-            lingerChancePerSecond: 0.05,
-            warningTime: 5.0,
-            attackTime: 13.0,
-            rollInterval: 1.0,
-            attackChancePerSecond: 0.18,
-            attackChanceRamp: 0.06,
-            attackMaxChance: 0.65,
-            cooldown: 12.0,
-            speed: 900,
-            biteDamageMult: 0.95
+            entryChance: 0.35,
+            lingerTime: 12.0,
+            lingerChancePerSecond: 0.08,
+            warningTime: 4.5,
+            attackTime: 12.0,
+            rollInterval: 0.8,
+            attackChancePerSecond: 0.35,
+            attackChanceRamp: 0.08,
+            attackMaxChance: 0.85,
+            cooldown: 9.0,
+            speed: 950,
+            biteDamageMult: 1.0
         },
         nextSpeciesOptions: ['Triceratops', 'Giganotosaurus', 'Spinosaurus', 'Archaeopteryx'],
     },
@@ -1143,10 +1143,10 @@ const STAGE_DEFS = [
         spawn: {
             initialShapes: 560,
             initialPowerUps: 16,
-            initialEnemies: 6,
+            initialEnemies: 8,
             desiredShapes: 650,
-            maxEnemiesBase: 9,
-            maxEnemiesPerLevel: 0.45,
+            maxEnemiesBase: 16,
+            maxEnemiesPerLevel: 0.55,
             startInvulnerable: 2.0,
         },
         enemy: {
@@ -1671,7 +1671,6 @@ class Dino extends Entity {
     constructor(x, y, isPlayer = false) {
         super(x, y, 20, isPlayer ? '#00e1b2' : '#ff5500'); // Jungle Teal / Danger Orange
         this.isPlayer = isPlayer;
-        this.team = isPlayer ? 'blue' : 'red';
         this.angle = 0;
         this.stats = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 9 Stats
         
@@ -1688,9 +1687,10 @@ class Dino extends Entity {
         this.teslaTimer = 0;
         
         this.className = "Baby Dino";
+        this.team = this.className; // Species-based Teams
         this.classDef = CLASS_DEFS['Baby Dino'];
         this.guns = JSON.parse(JSON.stringify(this.classDef.guns)); 
-        this.scaleMult = 1;
+        this.scaleMult = this.classDef.scale;
         
         this.bonusGunCount = 0; 
         this.weaponSizeMult = 1.0; 
@@ -1864,6 +1864,7 @@ class Dino extends Entity {
         const def = CLASS_DEFS[className];
         if (!def) return;
         this.className = className;
+        this.team = className; // Team = Species
         this.classDef = def;
         this.scaleMult = def.scale;
         
@@ -1993,10 +1994,38 @@ class Dino extends Entity {
             return;
         }
 
-        const dx = player.x - this.x;
-        const dy = player.y - this.y;
-        const dist = Math.hypot(dx, dy);
-        const hasTarget = dist < 1100 && !player.dead;
+        // --- FREE FOR ALL AI LOGIC ---
+        let target = null;
+        let minDist = 1100;
+
+        // Find nearest enemy (different species)
+        // Optimization: Check if player is near first, as they are priority for fun factor
+        // But also check other dinos.
+        
+        const enemies = entities; // Can use spatial grid if performance becomes issue
+        
+        for (let i = 0; i < enemies.length; i++) {
+             const e = enemies[i];
+             if (e.dead || e === this) continue;
+             if (!(e instanceof Dino)) continue;
+             
+             // Team check: Same species = friends
+             if (e.team === this.team) continue;
+             
+             const d = Math.hypot(e.x - this.x, e.y - this.y);
+             if (d < minDist) {
+                 minDist = d;
+                 target = e;
+             }
+        }
+        
+        const hasTarget = target !== null;
+        let dist = minDist;
+        let dx = 0, dy = 0;
+        if (target) {
+            dx = target.x - this.x;
+            dy = target.y - this.y;
+        }
 
         // Strafe behavior for ranged kiting
         this.strafeTimer -= dt;
@@ -2022,7 +2051,8 @@ class Dino extends Entity {
             const ux = dx * invDist;
             const uy = dy * invDist;
 
-            const fear = (player.r > this.r * 1.25) || (this.health < this.maxHealth * 0.25);
+            // Fear logic: target is bigger OR health is low
+            const fear = (target.r > this.r * 1.3) || (this.health < this.maxHealth * 0.25);
             this.aiState = fear ? 'flee' : (this.behavior === 'ranged' ? 'kite' : 'chase');
 
             this.angle = Math.atan2(dy, dx);
@@ -2708,32 +2738,39 @@ class MosasaurThreat {
         this.beepTimer = 0;
     }
 
-    startAttack(player) {
-        let x = player.x, y = player.y;
+    startAttack(target) {
+        if (!target) return;
+        let x = target.x, y = target.y;
         let found = false;
 
         for (let i = 0; i < 12; i++) {
             const a = rand(0, Math.PI * 2);
             const dist = rand(650, 1100);
-            const tx = clamp(player.x + Math.cos(a) * dist, 200, CONFIG.mapWidth - 200);
-            const ty = clamp(player.y + Math.sin(a) * dist, 200, CONFIG.mapHeight - 200);
+            const tx = clamp(target.x + Math.cos(a) * dist, 200, CONFIG.mapWidth - 200);
+            const ty = clamp(target.y + Math.sin(a) * dist, 200, CONFIG.mapHeight - 200);
             if (isWaterTile(getTileAtWorld(tx, ty))) {
                 x = tx; y = ty; found = true; break;
             }
         }
 
         if (!found) {
-            // As a fallback, attack from the player's current water position.
-            x = player.x; y = player.y;
+            // As a fallback, attack from the target's current water position.
+            x = target.x; y = target.y;
         }
 
-        this.attack = { x, y, r: 75, life: 3.0 };
+        this.attack = { x, y, r: 75, life: 3.0, target: target };
         this.cooldown = typeof this.config.cooldown === 'number' ? this.config.cooldown : 10;
-        this.timeInWater = 0;
-        this.warned = false;
-        this.panicWarned = true;
-        showNotification("MOSASAUR! GET OUT OF THE WATER!");
-        AudioSys.playTone(60, 'sawtooth', 0.4, 0.12, 'mosa_warn');
+        
+        if (target === player) {
+            this.timeInWater = 0;
+            this.warned = false;
+            this.panicWarned = true;
+            showNotification("MOSASAUR! GET OUT OF THE WATER!");
+            AudioSys.playTone(60, 'sawtooth', 0.4, 0.12, 'mosa_warn');
+        } else {
+             // AI Attack - no global warning, maybe a sound?
+             // Reset cooldown but don't reset player tracking state fully
+        }
     }
 
     update(dt, player) {
@@ -2749,140 +2786,163 @@ class MosasaurThreat {
 
         if (this.attack) {
             const a = this.attack;
+            const target = a.target || player;
             const speed = typeof this.config.speed === 'number' ? this.config.speed : 1100;
-            const dx = player.x - a.x;
-            const dy = player.y - a.y;
+            const dx = target.x - a.x;
+            const dy = target.y - a.y;
             const dist = Math.hypot(dx, dy) || 1;
 
             a.x += (dx / dist) * speed * dt;
             a.y += (dy / dist) * speed * dt;
-            a.life -= dt * (inWater ? 1 : 2.0);
+            a.life -= dt * (isWaterTile(getTileAtWorld(target.x, target.y)) ? 1 : 2.0);
 
-            if (inWater && dist < player.r + a.r) {
+            if (dist < target.r + a.r) {
                 const biteMult = typeof this.config.biteDamageMult === 'number' ? this.config.biteDamageMult : 1.2;
-                const damage = Math.max(1, player.maxHealth * biteMult);
-                player.takeDamage(damage, this.source, 'mosa');
-                if (!player.dead) {
-                    player.invulnerableTimer = Math.max(player.invulnerableTimer, 1.25);
-                    const ang = Math.atan2(player.y - a.y, player.x - a.x);
-                    player.vx += Math.cos(ang) * 1100;
-                    player.vy += Math.sin(ang) * 1100;
-                    for (let i = 0; i < 18; i++) particles.push(new Particle(player.x, player.y, '#66ddff'));
-                    this.maybeNotify("You barely escape the Mosasaur!", 1.0, 4.0);
+                const damage = Math.max(1, target.maxHealth * biteMult);
+                target.takeDamage(damage, this.source, 'mosa');
+                
+                if (!target.dead) {
+                    if (target === player) {
+                        target.invulnerableTimer = Math.max(target.invulnerableTimer, 1.25);
+                        this.maybeNotify("You barely escape the Mosasaur!", 1.0, 4.0);
+                    }
+                    const ang = Math.atan2(target.y - a.y, target.x - a.x);
+                    target.vx += Math.cos(ang) * 1100;
+                    target.vy += Math.sin(ang) * 1100;
+                    for (let i = 0; i < 18; i++) particles.push(new Particle(target.x, target.y, '#66ddff'));
                 }
                 a.life = 0;
             }
 
-            if (inWater) setWaterWarning("MOSASAUR ATTACKING!", '#ff4d6d');
-            else setWaterWarning(null);
+            if (target === player && isWaterTile(getTileAtWorld(player.x, player.y))) {
+                 setWaterWarning("MOSASAUR ATTACKING!", '#ff4d6d');
+            } else {
+                 setWaterWarning(null);
+            }
 
             if (a.life <= 0) {
                 this.attack = null;
                 setWaterWarning(null);
-                this.onExitWater();
+                if (target === player) this.onExitWater();
             }
             return;
         }
 
-        if (!inWater) {
-            setWaterWarning(null);
-            return;
+        if (!inWater) setWaterWarning(null);
+        
+        // Cooldown blocks all attacks
+        if (this.cooldown > 0) return;
+
+        // --- TRACKING LOGIC ---
+        // We track the player for HUD warnings, but we scan for ANY target for attacks
+        
+        if (inWater) {
+             this.timeInWater += dt;
+             
+             // Stalking Logic (Player Only for now)
+             if (!this.stalking) {
+                const lingerTime = typeof this.config.lingerTime === 'number' ? this.config.lingerTime : 12;
+                const lingerChance = typeof this.config.lingerChancePerSecond === 'number' ? this.config.lingerChancePerSecond : 0.08;
+
+                if (this.timeInWater > lingerTime && Math.random() < (lingerChance * dt)) {
+                    this.stalking = true;
+                    this.safeThisEntry = false;
+                    this.warned = false;
+                    this.panicWarned = false;
+                    this.rollTimer = 0;
+                    this.beepTimer = 0;
+                    this.maybeNotify("The water stirs...", 1.0, 4.0);
+                }
+             }
+
+             // Warnings (Player Only)
+             const warningTime = typeof this.config.warningTime === 'number' ? this.config.warningTime : 4;
+             const attackTime = typeof this.config.attackTime === 'number' ? this.config.attackTime : 9;
+             const denom = Math.max(0.001, attackTime - warningTime);
+             const rawDanger = (this.timeInWater - warningTime) / denom;
+             this.danger = clamp(rawDanger, 0, 1);
+
+             this.shadowAngle += dt * (0.7 + this.danger * 1.1);
+             const shadowDist = 420 - this.danger * 260;
+             this.shadowX = player.x + Math.cos(this.shadowAngle) * shadowDist;
+             this.shadowY = player.y + Math.sin(this.shadowAngle) * shadowDist;
+             if (!isWaterTile(getTileAtWorld(this.shadowX, this.shadowY))) {
+                this.shadowX = player.x;
+                this.shadowY = player.y;
+             }
+
+             if (!this.warned && this.timeInWater > warningTime) {
+                this.warned = true;
+                this.maybeNotify("Ripples... something huge is nearby.", 1.0, 3.0);
+                AudioSys.playTone(120, 'sine', 0.15, 0.08, 'mosa_ripple');
+             }
+             if (!this.panicWarned && this.danger > 0.85) {
+                this.panicWarned = true;
+                this.maybeNotify("LEAVE THE WATER NOW!", 1.0, 2.5);
+                AudioSys.playTone(220, 'square', 0.2, 0.12, 'mosa_panic');
+                AudioSys.playTone(110, 'square', 0.25, 0.12, 'mosa_panic2');
+             }
+
+             if (this.danger <= 0.01 && this.timeInWater < warningTime) setWaterWarning("MOSASAUR THREAT: LOW", '#ffd37a');
+             else if (this.danger < 0.6) setWaterWarning("MOSASAUR THREAT: MEDIUM", '#ffb703');
+             else setWaterWarning("MOSASAUR THREAT: HIGH — LEAVE WATER!", '#ff4d6d');
+
+             if (this.warned) {
+                this.beepTimer -= dt;
+                if (this.beepTimer <= 0) {
+                    const interval = clamp(1.15 - this.danger * 0.9, 0.22, 1.15);
+                    const freq = 140 + this.danger * 260;
+                    const vol = 0.035 + this.danger * 0.06;
+                    AudioSys.playTone(freq, 'sine', 0.06, vol, 'mosa_beep');
+                    this.beepTimer = interval;
+                }
+             }
         }
 
-        if (this.cooldown > 0) {
-            setWaterWarning(null);
-            return;
-        }
-
-        // Dice-roll stalking: many crossings are safe, but lingering can still trigger danger.
-        this.timeInWater += dt;
-
-        if (!this.stalking) {
-            const lingerTime = typeof this.config.lingerTime === 'number' ? this.config.lingerTime : 12;
-            const lingerChance = typeof this.config.lingerChancePerSecond === 'number' ? this.config.lingerChancePerSecond : 0.08;
-
-            if (this.timeInWater > lingerTime && Math.random() < (lingerChance * dt)) {
-                this.stalking = true;
-                this.safeThisEntry = false;
-                this.warned = false;
-                this.panicWarned = false;
-                this.rollTimer = 0;
-                this.beepTimer = 0;
-                this.maybeNotify("The water stirs...", 1.0, 4.0);
-            } else {
-                setWaterWarning(null);
-                return;
-            }
-        }
-
-        const warningTime = typeof this.config.warningTime === 'number' ? this.config.warningTime : 4;
+        // --- ATTACK TRIGGER ---
+        // Indiscriminate attack logic: Check ALL valid targets
+        
         const attackTime = typeof this.config.attackTime === 'number' ? this.config.attackTime : 9;
-
-        const denom = Math.max(0.001, attackTime - warningTime);
-        const rawDanger = (this.timeInWater - warningTime) / denom;
-        this.danger = clamp(rawDanger, 0, 1);
-
-        // Update shadow orbit (pre-attack telegraph)
-        this.shadowAngle += dt * (0.7 + this.danger * 1.1);
-        const shadowDist = 420 - this.danger * 260;
-        this.shadowX = player.x + Math.cos(this.shadowAngle) * shadowDist;
-        this.shadowY = player.y + Math.sin(this.shadowAngle) * shadowDist;
-        if (!isWaterTile(getTileAtWorld(this.shadowX, this.shadowY))) {
-            this.shadowX = player.x;
-            this.shadowY = player.y;
-        }
-
-        // Escalating warnings
-        if (!this.warned && this.timeInWater > warningTime) {
-            this.warned = true;
-            this.maybeNotify("Ripples... something huge is nearby.", 1.0, 3.0);
-            AudioSys.playTone(120, 'sine', 0.15, 0.08, 'mosa_ripple');
-        }
-        if (!this.panicWarned && this.danger > 0.85) {
-            this.panicWarned = true;
-            this.maybeNotify("LEAVE THE WATER NOW!", 1.0, 2.5);
-            AudioSys.playTone(220, 'square', 0.2, 0.12, 'mosa_panic');
-            AudioSys.playTone(110, 'square', 0.25, 0.12, 'mosa_panic2');
-        }
-
-        // HUD warning (very clear)
-        if (this.danger <= 0.01 && this.timeInWater < warningTime) {
-            setWaterWarning("MOSASAUR THREAT: LOW", '#ffd37a');
-        } else if (this.danger < 0.6) {
-            setWaterWarning("MOSASAUR THREAT: MEDIUM", '#ffb703');
-        } else {
-            setWaterWarning("MOSASAUR THREAT: HIGH — LEAVE WATER!", '#ff4d6d');
-        }
-
-        // Beeping sonar cue, faster as danger rises
-        if (this.warned) {
-            this.beepTimer -= dt;
-            if (this.beepTimer <= 0) {
-                const interval = clamp(1.15 - this.danger * 0.9, 0.22, 1.15);
-                const freq = 140 + this.danger * 260;
-                const vol = 0.035 + this.danger * 0.06;
-                AudioSys.playTone(freq, 'sine', 0.06, vol, 'mosa_beep');
-                this.beepTimer = interval;
-            }
-        }
-
-        // Attack starts via repeated rolls once the threat is "hot"
-        if (this.timeInWater > attackTime) {
+        
+        // Only attack if player is "Hot" OR if we roll for random aggression against AI
+        // Simplify: We roll aggression constantly. If player is hot, they are a candidate.
+        // If AI is in water, they are a candidate.
+        
+        this.rollTimer -= dt;
+        if (this.rollTimer <= 0) {
             const rollInterval = typeof this.config.rollInterval === 'number' ? this.config.rollInterval : 1.0;
             const baseChance = typeof this.config.attackChancePerSecond === 'number' ? this.config.attackChancePerSecond : 0.25;
-            const ramp = typeof this.config.attackChanceRamp === 'number' ? this.config.attackChanceRamp : 0.06;
+            
+            // Calculate chance (boost if player is hot)
+            let chance = baseChance;
+            if (inWater && this.timeInWater > attackTime) {
+                const ramp = typeof this.config.attackChanceRamp === 'number' ? this.config.attackChanceRamp : 0.06;
+                chance += (this.timeInWater - attackTime) * ramp;
+            }
             const maxChance = typeof this.config.attackMaxChance === 'number' ? this.config.attackMaxChance : 0.85;
-
-            this.rollTimer -= dt;
-            if (this.rollTimer <= 0) {
-                const secondsHot = this.timeInWater - attackTime;
-                const chance = clamp(baseChance + secondsHot * ramp, 0, maxChance);
-                if (Math.random() < chance) {
-                    this.startAttack(player);
+            chance = clamp(chance, 0, maxChance);
+            
+            if (Math.random() < chance) {
+                // Pick a target
+                const candidates = [];
+                if (inWater && this.timeInWater > attackTime) candidates.push(player);
+                
+                // Add AI Dinos in water
+                for(let e of entities) {
+                    if (e instanceof Dino && !e.isPlayer && !e.isBoss && !e.dead) {
+                        if (isWaterTile(getTileAtWorld(e.x, e.y))) {
+                            candidates.push(e);
+                        }
+                    }
+                }
+                
+                if (candidates.length > 0) {
+                    const victim = candidates[Math.floor(Math.random() * candidates.length)];
+                    this.startAttack(victim);
                     return;
                 }
-                this.rollTimer = rollInterval;
             }
+            this.rollTimer = rollInterval;
         }
     }
 
