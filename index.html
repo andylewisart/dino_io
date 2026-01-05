@@ -52,7 +52,7 @@
             border-radius: 8px;
             cursor: pointer;
             position: relative;
-            background-image: url('icons.png');
+            background-image: url('spritesheets/icons.png');
             background-size: 733.33% 400%; 
             transition: transform 0.1s, border-color 0.2s, filter 0.2s;
         }
@@ -256,6 +256,32 @@
             text-shadow: 1px 1px 0 #000;
         }
 
+        #run-text {
+            color: #cfcfcf;
+            font-size: 12px;
+            margin-top: 4px;
+            text-shadow: 1px 1px 0 #000;
+            opacity: 0.95;
+        }
+
+        #objective-text {
+            color: #ffd37a;
+            font-size: 12px;
+            margin-top: 2px;
+            text-shadow: 1px 1px 0 #000;
+            opacity: 0.95;
+        }
+
+        #water-warning {
+            display: none;
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 4px;
+            text-shadow: 2px 2px 0 #000;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
         #xp-bar-container {
             width: 400px;
             height: 15px;
@@ -306,6 +332,51 @@
             100% { opacity: 0; transform: translateY(-30px); }
         }
 
+        #crystal-hud {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            pointer-events: none;
+        }
+
+        .crystal-slot {
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .crystal-slot.filled {
+            border-color: white;
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.7);
+        }
+
+        .crystal-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px; /* Rough gem shape base */
+            transform: rotate(45deg);
+            opacity: 0.3;
+            transition: opacity 0.5s, box-shadow 0.5s;
+        }
+
+        .crystal-slot.filled .crystal-icon {
+            opacity: 1;
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        /* Adjust Mobile Controls to not overlap if needed */
         #mobile-controls {
             display: none;
             position: absolute;
@@ -394,6 +465,105 @@
             max-width: 600px;
         }
 
+        /* Reward / Run Complete Overlays */
+        #reward-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.72);
+            z-index: 80;
+            pointer-events: auto;
+        }
+
+        #reward-panel {
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            padding: 18px 18px 22px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            max-width: 1100px;
+            width: calc(100% - 40px);
+        }
+
+        #reward-title {
+            color: white;
+            font-weight: 900;
+            font-size: 22px;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 14px;
+        }
+
+        #reward-subtitle {
+            color: #ddd;
+            font-size: 13px;
+            margin-top: -8px;
+            margin-bottom: 18px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        #reward-menu {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #run-complete-ui {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: none;
+            z-index: 90;
+            background: rgba(0,0,0,0.85);
+            padding: 22px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.15);
+            pointer-events: auto;
+            max-width: 620px;
+            width: calc(100% - 40px);
+        }
+
+        #run-complete-ui h1 {
+            color: #fff;
+            font-size: 42px;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        #run-complete-text {
+            color: #ddd;
+            font-size: 16px;
+            margin-top: 10px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .ui-btn {
+            margin-top: 16px;
+            background: rgba(50, 200, 120, 0.75);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 8px;
+            pointer-events: auto;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .ui-btn:hover {
+            background: rgba(50, 220, 140, 0.95);
+        }
+
         #reset-btn {
             position: absolute;
             top: 10px;
@@ -413,6 +583,51 @@
             background: rgba(255, 50, 50, 0.9);
         }
 
+        #boss-slain-ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none; /* Flex when active */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.6);
+            z-index: 95;
+            pointer-events: none;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        #boss-slain-text {
+            font-size: 80px;
+            font-weight: 900;
+            color: #ff3333;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px #ff0000, 4px 4px 0 #000;
+            letter-spacing: 4px;
+            transform: scale(0);
+            animation: slam 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s;
+        }
+
+        #boss-slain-sub {
+            font-size: 24px;
+            color: #fff;
+            margin-top: 20px;
+            text-shadow: 2px 2px 0 #000;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards 1.0s;
+        }
+
+        @keyframes slam {
+            0% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -420,11 +635,14 @@
 <canvas id="gameCanvas"></canvas>
 
 <div id="ui-layer">
-    <div id="reset-btn" onclick="resetGame()">RESET SAVE</div>
+    <div id="reset-btn" onclick="resetGame()">RESTART RUN</div>
     <div id="respec-btn" onclick="refundStats()" style="position: absolute; top: 10px; right: 110px; background: rgba(50, 150, 200, 0.6); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 12px; cursor: pointer; font-size: 12px; border-radius: 4px; pointer-events: auto; font-weight: bold;">RESPEC</div>
     <div id="hud-top">
         <div id="score-text">Score: 0</div>
         <div id="class-text">Lvl 1 Baby Dino</div>
+        <div id="run-text">Level 1/2 • Lives 5/5 • Jewels 0/5</div>
+        <div id="objective-text"></div>
+        <div id="water-warning"></div>
         <div id="xp-bar-container">
             <div id="xp-bar-fill"></div>
         </div>
@@ -437,6 +655,8 @@
 
     <!-- Class Selector -->
     <div id="class-upgrade-menu"></div>
+
+    <div id="crystal-hud"></div>
 
     <div id="action-bar">
         <!-- Stat buttons -->
@@ -452,6 +672,25 @@
         <h1 style="color:white; font-size:40px; margin:0; text-shadow:0 0 10px red;">YOU DIED</h1>
         <div id="respawn-text" style="color:white; font-size:24px;">Respawning...</div>
         <div id="ai-death-message">✨ Analyzing defeat...</div>
+    </div>
+
+    <div id="boss-slain-ui">
+        <div id="boss-slain-text">PREY SLAUGHTERED</div>
+        <div id="boss-slain-sub">Evolution Imminent...</div>
+    </div>
+
+    <div id="reward-overlay">
+        <div id="reward-panel">
+            <div id="reward-title">Choose Your Next Species</div>
+            <div id="reward-subtitle">Boss defeated. Your evolution awaits.</div>
+            <div id="reward-menu"></div>
+        </div>
+    </div>
+
+    <div id="run-complete-ui">
+        <h1>RUN COMPLETE</h1>
+        <div id="run-complete-text">You cleared all available levels.</div>
+        <button class="ui-btn" onclick="resetGame()">RESTART RUN</button>
     </div>
 
     <div id="mobile-controls">
@@ -487,9 +726,28 @@ let particles = [];
 let damageNumbers = [];
 let explosions = []; 
 let boss = null;
+let bossArena = null;
 let lastTime = 0;
-let bossTimer = 0;
 let respawnTimer = 3;
+let gameMode = 'play'; // 'play' | 'reward' | 'complete'
+let runResetTimer = 0;
+
+const RUN_CONFIG = {
+    totalStages: 2,
+    maxLives: 5,
+};
+
+let runState = {
+    stageIndex: 0,
+    lives: RUN_CONFIG.maxLives,
+    score: 0,
+    selectedSpecies: 'Baby Dino',
+    spawnX: 0,
+    spawnY: 0,
+};
+
+let stageState = null;
+let currentStageDef = null;
 
 // --- Constants & Config ---
 const apiKey = ""; // Provided by environment
@@ -507,6 +765,8 @@ const AudioSys = {
     lastPlayed: {},
     deathAudio: new Audio('YOUDIED.mp3'),
     bgMusic: new Audio('Jurassic_Journey.mp3'),
+    bossMusic: new Audio('BossBattle.mp3'),
+    victoryMusic: new Audio('DefeatedBoss.mp3'),
     playlist: ['Jurassic_Journey.mp3', 'Dino_Plains_Drifter.mp3'],
     trackIndex: 0,
 
@@ -514,6 +774,8 @@ const AudioSys = {
         if (!this.ctx) {
             this.ctx = new (window.AudioContext || window.webkitAudioContext)();
             this.deathAudio.load(); // Preload
+            this.bossMusic.load(); // Preload
+            this.victoryMusic.load(); // Preload
             
             this.bgMusic.loop = false;
             this.bgMusic.volume = 0.3;
@@ -524,6 +786,11 @@ const AudioSys = {
                 this.bgMusic.src = this.playlist[this.trackIndex];
                 this.bgMusic.play().catch(e => console.log("Next track play failed", e));
             });
+            
+            // Victory music to Normal queue
+            this.victoryMusic.addEventListener('ended', () => {
+                 this.resumeNormalMusic();
+            });
         }
         if (this.ctx.state === 'suspended') this.ctx.resume();
         
@@ -533,8 +800,13 @@ const AudioSys = {
     },
     playDeathSound: function() {
         this.bgMusic.pause();
-        this.deathAudio.currentTime = 0;
-        this.deathAudio.play().catch(e => {
+        this.bossMusic.pause();
+        this.victoryMusic.pause();
+        
+        // Create fresh instance to avoid state/seek issues
+        const sfx = new Audio('YOUDIED.mp3');
+        sfx.volume = 1.0;
+        sfx.play().catch(e => {
             console.error("Death audio failed:", e);
             // Fallback: Sad Trombone
             this.playTone(150, 'sawtooth', 0.5, 0.2);
@@ -542,9 +814,32 @@ const AudioSys = {
         });
     },
     resumeMusic: function() {
-        if (this.bgMusic.paused) {
+        if (this.bgMusic.paused && this.bossMusic.paused && this.victoryMusic.paused) {
             this.bgMusic.play().catch(e => console.log("Resume music failed", e));
         }
+    },
+    playBossMusic: function() {
+        this.bgMusic.pause();
+        this.victoryMusic.pause();
+        this.bossMusic.loop = true;
+        this.bossMusic.volume = 0.4;
+        this.bossMusic.currentTime = 0;
+        this.bossMusic.play().catch(e => console.log("Boss music failed", e));
+    },
+    playVictoryMusic: function() {
+        this.bgMusic.pause();
+        this.bossMusic.pause();
+        this.victoryMusic.loop = false;
+        this.victoryMusic.volume = 0.5;
+        this.victoryMusic.currentTime = 0;
+        this.victoryMusic.play().catch(e => console.log("Victory music failed", e));
+    },
+    resumeNormalMusic: function() {
+        this.bossMusic.pause();
+        this.victoryMusic.pause();
+        this.bossMusic.currentTime = 0;
+        this.victoryMusic.currentTime = 0;
+        if (this.bgMusic.paused) this.bgMusic.play().catch(e => console.log("Normal music failed", e));
     },
     playTone: function(freq, type, duration, vol=0.1, id=null) {
         if (!this.ctx) return;
@@ -777,6 +1072,103 @@ const MUTATIONS = [
     { name: "Titan Skin", desc: "+25% Armor.", action: (p) => { p.stats[1] += 5; p.stats[2] += 5; p.recalcStats(); } }
 ];
 
+// --- Run / Stage Definitions ---
+const JEWEL_TYPES = [
+    { id: 'ruby', name: 'Ruby', color: '#ff3355' },
+    { id: 'sapphire', name: 'Sapphire', color: '#2f7bff' },
+    { id: 'emerald', name: 'Emerald', color: '#34ff89' },
+    { id: 'amethyst', name: 'Amethyst', color: '#b44cff' },
+    { id: 'topaz', name: 'Topaz', color: '#ffd34a' },
+];
+
+const STAGE_DEFS = [
+    {
+        name: 'Level 1',
+        terrainSrc: 'terrain.jpg',
+        terrain: {
+            grass: { count: 50, minR: 1, maxR: 3 },
+            waterSmall: { count: 16, minR: 1, maxR: 2 },
+            waterBig: { count: 1, minR: 4, maxR: 6 },
+            lava: { count: 6, minR: 1, maxR: 1 },
+        },
+        spawn: {
+            initialShapes: 520,
+            initialPowerUps: 18,
+            initialEnemies: 4,
+            desiredShapes: 620,
+            maxEnemiesBase: 6,
+            maxEnemiesPerLevel: 0.35,
+            startInvulnerable: 2.5,
+        },
+        enemy: {
+            levelOffset: 0,
+            minDelta: -1,
+            maxDelta: 0,
+            statsDiv: 4,
+            rangedChance: 0.10,
+            traitChance: 0.20,
+            healthMult: 0.85,
+            damageMult: 0.80,
+            moveSpeedMult: 0.92,
+        },
+        jewelTotal: 5,
+        waterJewelCount: 0,
+        minimapReveal: { jewel: 800, gate: 900 },
+        difficultyOffset: 0,
+        mosasaur: {
+            entryChance: 0.28,
+            lingerTime: 14.0,
+            lingerChancePerSecond: 0.05,
+            warningTime: 5.0,
+            attackTime: 13.0,
+            rollInterval: 1.0,
+            attackChancePerSecond: 0.18,
+            attackChanceRamp: 0.06,
+            attackMaxChance: 0.65,
+            cooldown: 12.0,
+            speed: 900,
+            biteDamageMult: 0.95
+        },
+        nextSpeciesOptions: ['Triceratops', 'Giganotosaurus', 'Spinosaurus', 'Archaeopteryx'],
+    },
+    {
+        name: 'Level 2',
+        terrainSrc: 'terrainFrozen.jpg',
+        terrain: {
+            grass: { count: 40, minR: 1, maxR: 3 },
+            waterSmall: { count: 10, minR: 1, maxR: 2 },
+            waterBig: { count: 2, minR: 5, maxR: 8 },
+            lava: { count: 8, minR: 1, maxR: 1 },
+        },
+        spawn: {
+            initialShapes: 560,
+            initialPowerUps: 16,
+            initialEnemies: 6,
+            desiredShapes: 650,
+            maxEnemiesBase: 9,
+            maxEnemiesPerLevel: 0.45,
+            startInvulnerable: 2.0,
+        },
+        enemy: {
+            levelOffset: 2,
+            minDelta: -1,
+            maxDelta: 1,
+            statsDiv: 3,
+            rangedChance: 0.18,
+            traitChance: 0.35,
+            healthMult: 0.95,
+            damageMult: 0.95,
+            moveSpeedMult: 0.98,
+        },
+        jewelTotal: 5,
+        waterJewelCount: 1,
+        minimapReveal: { jewel: 850, gate: 950 },
+        difficultyOffset: 4,
+        mosasaur: null,
+        nextSpeciesOptions: ['Titanosaur', 'Indominus', 'T-Rex', 'Velociraptor'],
+    },
+];
+
 // --- Utility Functions ---
 const rand = (min, max) => Math.random() * (max - min) + min;
 const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
@@ -851,12 +1243,16 @@ class Entity {
         this.x += this.vx * dt;
         this.y += this.vy * dt;
         this.ax = 0; this.ay = 0;
+        
+        // Reset friction (default land)
+        this.friction = 0.9;
 
         // Terrain Effects
         const tx = Math.floor(this.x / CONFIG.gridSize);
         const ty = Math.floor(this.y / CONFIG.gridSize);
         if (terrainGrid && terrainGrid[tx] && terrainGrid[tx][ty] !== undefined) {
             const tile = terrainGrid[tx][ty];
+            
             if (tile === TILES.LAVA) {
                 if (this instanceof Dino) {
                     this.takeDamage(dt * 30, null, 'lava');
@@ -866,6 +1262,8 @@ class Entity {
             } else if (tile === TILES.WATER) {
                 this.vx *= 0.95; // Sluggish movement
                 this.vy *= 0.95;
+            } else if (tile === TILES.ICE || tile === TILES.FROZEN_LAVA) {
+                this.friction = 0.99; // Slippery
             }
         }
 
@@ -945,7 +1343,8 @@ const POWERUP_TYPES = {
     'shield': { color: '#00ffff', label: '🛡', duration: 8, r: 18 }, // Invulnerability
     'speed':  { color: '#ffff00', label: '⏩', duration: 12, r: 15 }, // +50% Speed
     'tiny':   { color: '#ff00ff', label: '🐜', duration: 15, r: 15 }, // Small size + Evasion
-    'xp':     { color: '#7b00ff', label: '★', duration: 0, r: 14 }   // Big XP Chunk
+    'xp':     { color: '#7b00ff', label: '★', duration: 0, r: 14 },  // Big XP Chunk
+    'life':   { color: '#00ff88', label: '1UP', duration: 0, r: 18 } // Extra Life (Run)
 };
 
 class PowerUp extends Entity {
@@ -1316,6 +1715,10 @@ class Dino extends Entity {
             this.health = this.maxHealth;
             this.aiDirTimer = 0;
             this.targetLockedTimer = 0;
+            this.aiState = 'roam';
+            this.aiStateTimer = 0;
+            this.strafeDir = Math.random() < 0.5 ? -1 : 1;
+            this.strafeTimer = rand(0.6, 1.4);
         }
     }
 
@@ -1407,6 +1810,17 @@ class Dino extends Entity {
             spawnDamageNumber(this.x, this.y, "XP UP", '#7b00ff', 20);
             return;
         }
+        if (type === 'life') {
+            if (runState.lives < RUN_CONFIG.maxLives) {
+                runState.lives++;
+                spawnDamageNumber(this.x, this.y, "1UP", '#00ff88', 22);
+                showNotification("Extra Life!");
+                updateHud();
+            } else {
+                spawnDamageNumber(this.x, this.y, "MAX", '#00ff88', 16);
+            }
+            return;
+        }
 
         // Temporary Effects
         // Check if already active, if so, extend duration
@@ -1423,11 +1837,11 @@ class Dino extends Entity {
     gainXp(amount) {
         this.xp += amount;
         this.score += amount;
+        if (this.isPlayer) runState.score = this.score;
         if (this.xp >= this.maxXp) {
             this.levelUp();
         }
         updateHud();
-        if (Math.floor(this.score / 1000) > Math.floor((this.score - amount) / 1000)) saveGame(true); 
     }
 
     levelUp() {
@@ -1443,8 +1857,7 @@ class Dino extends Entity {
         
         showNotification(`Level Up! Lvl ${this.level}`);
         updateUpgradeUi();
-        checkClassUpgrades();
-        saveGame(true);
+        checkWeaponUpgrades();
     }
 
     evolve(className) {
@@ -1580,55 +1993,153 @@ class Dino extends Entity {
             return;
         }
 
-        this.aiDirTimer -= dt;
-        if (this.aiDirTimer <= 0) {
-            this.aiDirTimer = rand(1, 3);
-            const moveAngle = rand(0, Math.PI*2);
-            this.ax = Math.cos(moveAngle) * this.moveSpeed * 3;
-            this.ay = Math.sin(moveAngle) * this.moveSpeed * 3;
+        const dx = player.x - this.x;
+        const dy = player.y - this.y;
+        const dist = Math.hypot(dx, dy);
+        const hasTarget = dist < 1100 && !player.dead;
+
+        // Strafe behavior for ranged kiting
+        this.strafeTimer -= dt;
+        if (this.strafeTimer <= 0) {
+            this.strafeTimer = rand(0.6, 1.6);
+            if (Math.random() < 0.65) this.strafeDir *= -1;
         }
 
-        let target = null;
-        
-        const dist = Math.hypot(player.x - this.x, player.y - this.y);
-        // Anti-Vaporize: Don't target/shoot if too far (roughly off-screen)
-        if (dist < 900 && !player.dead) {
-            target = player;
-        }
-
-        if (target) {
-            this.targetLockedTimer += dt;
-            this.angle = Math.atan2(target.y - this.y, target.x - this.x);
-            
-            // Reaction Delay: Only shoot after tracking for 0.5s
-            if (this.guns && this.guns.length > 0 && this.targetLockedTimer > 0.5) {
-                this.aiShooting = true;
-            } else {
-                this.aiShooting = false;
-            }
-            
-            if (this.behavior === 'melee') {
-                this.ax += Math.cos(this.angle) * 200; 
-                this.ay += Math.sin(this.angle) * 200;
-            } else {
-                if (dist > 250) { 
-                    this.ax += Math.cos(this.angle) * 150; 
-                    this.ay += Math.sin(this.angle) * 150; 
-                } else if (dist < 150) {
-                     this.ax -= Math.cos(this.angle) * 100;
-                     this.ay -= Math.sin(this.angle) * 100;
-                }
-            }
-        } else {
+        if (!hasTarget) {
+            this.aiState = 'roam';
             this.aiShooting = false;
             this.targetLockedTimer = 0;
+
+            this.aiDirTimer -= dt;
+            if (this.aiDirTimer <= 0) {
+                this.aiDirTimer = rand(1.0, 2.8);
+                const moveAngle = rand(0, Math.PI * 2);
+                this.ax = Math.cos(moveAngle) * this.moveSpeed * 3;
+                this.ay = Math.sin(moveAngle) * this.moveSpeed * 3;
+            }
+        } else {
+            const invDist = 1 / Math.max(1, dist);
+            const ux = dx * invDist;
+            const uy = dy * invDist;
+
+            const fear = (player.r > this.r * 1.25) || (this.health < this.maxHealth * 0.25);
+            this.aiState = fear ? 'flee' : (this.behavior === 'ranged' ? 'kite' : 'chase');
+
+            this.angle = Math.atan2(dy, dx);
+
+            // Shooting only if we're committed to the fight
+            if (this.behavior === 'ranged' && !fear && this.guns && this.guns.length > 0) {
+                this.targetLockedTimer += dt;
+                this.aiShooting = this.targetLockedTimer > 0.35 && dist < 950;
+            } else {
+                this.aiShooting = false;
+                this.targetLockedTimer = 0;
+            }
+
+            if (this.aiState === 'chase') {
+                this.ax += ux * this.moveSpeed * 2.2;
+                this.ay += uy * this.moveSpeed * 2.2;
+            } else if (this.aiState === 'flee') {
+                this.ax -= ux * this.moveSpeed * 2.8;
+                this.ay -= uy * this.moveSpeed * 2.8;
+
+                const px = -uy, py = ux;
+                this.ax += px * this.moveSpeed * 1.4 * this.strafeDir;
+                this.ay += py * this.moveSpeed * 1.4 * this.strafeDir;
+            } else if (this.aiState === 'kite') {
+                const desired = 420;
+                const band = 90;
+
+                if (dist > desired + band) {
+                    this.ax += ux * this.moveSpeed * 1.8;
+                    this.ay += uy * this.moveSpeed * 1.8;
+                } else if (dist < desired - band) {
+                    this.ax -= ux * this.moveSpeed * 2.4;
+                    this.ay -= uy * this.moveSpeed * 2.4;
+                }
+
+                const px = -uy, py = ux;
+                this.ax += px * this.moveSpeed * 1.9 * this.strafeDir;
+                this.ay += py * this.moveSpeed * 1.9 * this.strafeDir;
+            }
+        }
+
+        // Avoid stacking up (simple separation steering)
+        if (spatialGrid && spatialGrid.query) {
+            const near = spatialGrid.query(this);
+            for (let i = 0; i < near.length; i++) {
+                const o = near[i];
+                if (!o || o === this || o.dead) continue;
+                if (!(o instanceof Dino) || o.isPlayer || o.isBoss) continue;
+
+                const rx = this.x - o.x;
+                const ry = this.y - o.y;
+                const d = Math.hypot(rx, ry);
+                const minD = (this.r + o.r) * 1.05;
+                if (d > 0 && d < minD) {
+                    const push = (minD - d) / minD;
+                    this.ax += (rx / d) * this.moveSpeed * 2.2 * push;
+                    this.ay += (ry / d) * this.moveSpeed * 2.2 * push;
+                }
+            }
+
+            // Evasive trait: dodge nearby bullets (quick lateral burst)
+            if (this.trait === 'evasive') {
+                for (let i = 0; i < near.length; i++) {
+                    const o = near[i];
+                    if (!(o instanceof Bullet) || o.dead) continue;
+                    if (o.team === this.team) continue;
+
+                    const rx = this.x - o.x;
+                    const ry = this.y - o.y;
+                    const d = Math.hypot(rx, ry);
+                    if (d > 260) continue;
+
+                    const toward = (rx * o.vx + ry * o.vy) > 0;
+                    if (!toward) continue;
+
+                    const bv = Math.hypot(o.vx, o.vy) || 1;
+                    const px = -o.vy / bv;
+                    const py = o.vx / bv;
+                    const side = Math.sign(rx * px + ry * py) || 1;
+                    this.ax += px * side * this.moveSpeed * 3.0;
+                    this.ay += py * side * this.moveSpeed * 3.0;
+                    break;
+                }
+            }
+        }
+
+        // Lava escape (strong bias to step off lava tiles)
+        const tile = getTileAtWorld(this.x, this.y);
+        if (tile === TILES.LAVA) {
+            const tx = Math.floor(this.x / CONFIG.gridSize);
+            const ty = Math.floor(this.y / CONFIG.gridSize);
+            const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+            let best = null;
+            for (let i = 0; i < dirs.length; i++) {
+                const nx = tx + dirs[i][0];
+                const ny = ty + dirs[i][1];
+                if (!terrainGrid[nx] || terrainGrid[nx][ny] === undefined) continue;
+                const t = terrainGrid[nx][ny];
+                if (t === TILES.LAVA) continue;
+                const cx = (nx + 0.5) * CONFIG.gridSize;
+                const cy = (ny + 0.5) * CONFIG.gridSize;
+                best = { x: cx, y: cy };
+                break;
+            }
+            if (best) {
+                const a = Math.atan2(best.y - this.y, best.x - this.x);
+                this.ax += Math.cos(a) * this.moveSpeed * 6;
+                this.ay += Math.sin(a) * this.moveSpeed * 6;
+            }
         }
     }
 
     handleBossAi(dt) {
-        const distToCenter = Math.hypot(this.x - CONFIG.mapWidth/2, this.y - CONFIG.mapHeight/2);
-        if (distToCenter > CONFIG.nestRadius + 200) {
-            const angle = Math.atan2(CONFIG.mapHeight/2 - this.y, CONFIG.mapWidth/2 - this.x);
+        const arena = bossArena || { x: CONFIG.mapWidth / 2, y: CONFIG.mapHeight / 2, r: CONFIG.nestRadius };
+        const distToCenter = Math.hypot(this.x - arena.x, this.y - arena.y);
+        if (distToCenter > arena.r + 200) {
+            const angle = Math.atan2(arena.y - this.y, arena.x - this.x);
             this.ax = Math.cos(angle) * this.moveSpeed * 5;
             this.ay = Math.sin(angle) * this.moveSpeed * 5;
         } else {
@@ -1749,14 +2260,39 @@ class Dino extends Entity {
         
         ctx.restore(); // END ROTATED LAYER
 
-        const isTrike = this.className.includes('Triceratops') || this.className.includes('Stego');
-        const isRaptor = this.className.includes('Raptor') || this.className.includes('Veloci') || this.className.includes('Indom') || this.className.includes('Archaeo');
-        const isRex = this.className.includes('Rex') || this.className.includes('Spino') || this.className.includes('Giga') || this.className.includes('Titan');
-        const isQuadruped = isTrike || this.className.includes('Titan') || this.className === 'Baby Dino';
+        // --- SPRITE SELECTION ---
+        let spriteImg = null;
+        // Check Bosses First
+        if (this.isBoss) {
+             if (this.name.includes('Guardian')) spriteImg = triceratopsImage;
+             else if (this.name.includes('Destroyer')) spriteImg = trexImage;
+             else if (this.name.includes('Titan')) spriteImg = titanosaurImage;
+             else if (this.name.includes('Prism')) spriteImg = spinosaurusImage;
+             else if (this.name.includes('Brood')) spriteImg = indominusImage;
+             else spriteImg = trexImage; // Generic boss fallback
+        }
+        
+        // Standard Classes
+        if (!spriteImg) {
+            if (this.className.includes('Baby')) spriteImg = babyDinoImage;
+            else if (this.className.includes('Raptor')) spriteImg = raptorImage;
+            else if (this.className.includes('Diloph')) spriteImg = dilophosaurImage;
+            else if (this.className.includes('Stego')) spriteImg = stegosaurusImage;
+            else if (this.className.includes('Pterodactyl')) spriteImg = pterodactylImage;
+            else if (this.className.includes('Tri')) spriteImg = triceratopsImage;
+            else if (this.className.includes('Giga')) spriteImg = giganotosaurusImage;
+            else if (this.className.includes('Spino')) spriteImg = spinosaurusImage;
+            else if (this.className.includes('Archaeo')) spriteImg = archaeopteryxImage;
+            else if (this.className.includes('Titan')) spriteImg = titanosaurImage;
+            else if (this.className.includes('Indom')) spriteImg = indominusImage;
+            else if (this.className.includes('Rex')) spriteImg = trexImage;
+            else if (this.className.includes('Veloci')) spriteImg = velociraptorImage;
+        }
 
-        const useBabyImg = this.className === 'Baby Dino' && babyDinoImage.complete && babyDinoImage.naturalWidth > 0;
+        // Final fallback
+        if (!spriteImg) spriteImg = babyDinoImage;
 
-        if (useBabyImg) {
+        if (spriteImg && spriteImg.complete && spriteImg.naturalWidth > 0) {
             // --- SPRITE RENDERING ---
             // Orient based on velocity (Left/Right)
             let facingLeft = false;
@@ -1781,8 +2317,8 @@ class Dino extends Entity {
             else if (speed > 50) row = 1; // Walk
             else row = 0; // Idle
             
-            const frameW = 350;
-            const frameH = 200;
+            const frameW = 256;
+            const frameH = 256;
             const frame = Math.floor(Date.now() / 150) % 4;
             
             // Scale: Map sprite height to dino size
@@ -1790,160 +2326,16 @@ class Dino extends Entity {
             const drawW = drawH * (frameW / frameH);
             
             // Adjust offset to center
-            ctx.drawImage(babyDinoImage, frame * frameW, row * frameH, frameW, frameH, -drawW * 0.55, -drawH/2, drawW, drawH);
+            ctx.drawImage(spriteImg, frame * frameW, row * frameH, frameW, frameH, -drawW * 0.55, -drawH/2, drawW, drawH);
             
             ctx.restore();
-
         } else {
-            // --- PROCEDURAL RENDERING ---
-            // Procedural MUST rotate to match aim
-            ctx.save();
-            ctx.rotate(this.angle);
-
-            let mainColor = this.color;
-            if (this.trait === 'armored') mainColor = '#778899'; 
-            if (this.trait === 'ablative') mainColor = '#eeeeee'; 
-            
-            const darkColor = adjustColor(mainColor, -40);
-            const lightColor = adjustColor(mainColor, 40);
-
-            ctx.strokeStyle = '#222';
-            ctx.lineWidth = 2;
-
-            const tailSway = Math.sin(this.animState) * 0.15;
-            ctx.fillStyle = mainColor;
-            ctx.beginPath();
-            if (isRaptor) {
-                ctx.moveTo(0, -this.r * 0.3); 
-                ctx.quadraticCurveTo(-this.r, -this.r*0.2 + tailSway*10, -this.r * 2.0, tailSway * 20); 
-                ctx.quadraticCurveTo(-this.r, this.r*0.2 + tailSway*10, 0, this.r * 0.3); 
-            } else if (isRex) {
-                ctx.moveTo(0, -this.r * 0.5);
-                ctx.lineTo(-this.r * 1.6, tailSway * 10);
-                ctx.lineTo(0, this.r * 0.5);
-            } else {
-                ctx.moveTo(0, -this.r * 0.4);
-                ctx.lineTo(-this.r * 1.3, tailSway * 5);
-                ctx.lineTo(0, this.r * 0.4);
-            }
-            ctx.fill(); ctx.stroke();
-
-            const walkCycle = Math.sin(this.animState);
-            const footRadius = this.r * 0.25;
-            const footDistSide = this.r * 0.5; 
-            
-            ctx.fillStyle = darkColor; 
-            
-            if (isQuadruped) {
-                const frontOffset = walkCycle * this.r * 0.2;
-                const backOffset = -walkCycle * this.r * 0.2;
-                ctx.beginPath(); ctx.arc(-this.r*0.3 + backOffset, -footDistSide, footRadius, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.arc(-this.r*0.3 - backOffset, footDistSide, footRadius, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.arc(this.r*0.3 + frontOffset, -footDistSide, footRadius, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.arc(this.r*0.3 - frontOffset, footDistSide, footRadius, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-            } else {
-                const legOffset = walkCycle * this.r * 0.3;
-                ctx.beginPath(); ctx.ellipse(-this.r*0.1 + legOffset, -footDistSide*1.1, footRadius*1.4, footRadius, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.ellipse(-this.r*0.1 - legOffset, footDistSide*1.1, footRadius*1.4, footRadius, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-            }
-
-            const bodyGrad = ctx.createRadialGradient(-this.r*0.2, -this.r*0.2, 0, 0, 0, this.r);
-            bodyGrad.addColorStop(0, lightColor); 
-            bodyGrad.addColorStop(0.4, mainColor);
-            bodyGrad.addColorStop(1, darkColor);
-            
-            ctx.fillStyle = bodyGrad;
-            ctx.beginPath();
-            if (isRaptor) {
-                ctx.ellipse(0, 0, this.r, this.r*0.55, 0, 0, Math.PI*2); 
-            } else if (isRex) {
-                ctx.ellipse(0, 0, this.r, this.r*0.85, 0, 0, Math.PI*2); 
-            } else {
-                ctx.ellipse(0, 0, this.r, this.r*0.75, 0, 0, Math.PI*2); 
-            }
-            ctx.fill(); ctx.stroke();
-            
-            // --- SKIN PATTERNS ---
-            ctx.save();
-            ctx.clip(); // Clip pattern to body
-            ctx.fillStyle = 'rgba(0,0,0,0.15)';
-            if (this.patternType === 'stripes') {
-                const stripes = 5;
-                for(let i=0; i<stripes; i++) {
-                    const xPos = -this.r + (i * (this.r*2)/stripes);
-                    ctx.beginPath();
-                    ctx.moveTo(xPos + this.patternSeed*10, -this.r);
-                    ctx.lineTo(xPos - 10, this.r);
-                    ctx.lineTo(xPos + 5, this.r);
-                    ctx.lineTo(xPos + 15 + this.patternSeed*10, -this.r);
-                    ctx.fill();
-                }
-            } else {
-                const spots = 6;
-                for(let i=0; i<spots; i++) {
-                    // Use pseudo-random based on seed + index
-                    const sX = (Math.sin(this.patternSeed * 100 + i) * this.r * 0.8);
-                    const sY = (Math.cos(this.patternSeed * 100 + i) * this.r * 0.5);
-                    const sR = (Math.abs(Math.sin(i)) * this.r * 0.2) + 2;
-                    ctx.beginPath(); ctx.arc(sX, sY, sR, 0, Math.PI*2); ctx.fill();
-                }
-            }
-            ctx.restore();
-            // ---------------------
-
-            const headX = this.r * 0.7;
-            ctx.fillStyle = mainColor;
-            ctx.beginPath();
-            
-            if (isTrike) {
-                ctx.save();
-                ctx.translate(headX * 0.6, 0);
-                ctx.fillStyle = darkColor;
-                ctx.beginPath();
-                ctx.arc(0, 0, this.r*0.75, -Math.PI/2, Math.PI/2); 
-                ctx.lineTo(0,0);
-                ctx.fill(); ctx.stroke();
-                ctx.restore();
-                ctx.beginPath(); ctx.ellipse(headX, 0, this.r*0.4, this.r*0.35, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.fillStyle = '#eee';
-                ctx.beginPath(); ctx.moveTo(headX + this.r*0.3, 0); ctx.lineTo(headX + this.r*0.8, 0); ctx.lineTo(headX + this.r*0.3, 3); ctx.fill();
-                ctx.beginPath(); ctx.moveTo(headX, -this.r*0.2); ctx.lineTo(headX + this.r*0.8, -this.r*0.6); ctx.lineTo(headX+5, -this.r*0.1); ctx.fill();
-                ctx.beginPath(); ctx.moveTo(headX, this.r*0.2); ctx.lineTo(headX + this.r*0.8, this.r*0.6); ctx.lineTo(headX+5, this.r*0.1); ctx.fill();
-            } else if (isRex) {
-                ctx.fillStyle = mainColor;
-                ctx.rect(headX - this.r*0.2, -this.r*0.45, this.r*0.9, this.r*0.9);
-                ctx.fill(); ctx.stroke();
-            } else if (isRaptor) {
-                ctx.ellipse(headX, 0, this.r*0.5, this.r*0.28, 0, 0, Math.PI*2);
-                ctx.fill(); ctx.stroke();
-            } else {
-                ctx.arc(headX, 0, this.r*0.45, 0, Math.PI*2);
-                ctx.fill(); ctx.stroke();
-            }
-
-            ctx.fillStyle = 'white';
-            const eyeY = this.r * (isRex ? 0.3 : 0.2);
-            ctx.beginPath(); ctx.arc(headX, -eyeY, this.r*0.12, 0, Math.PI*2); ctx.fill();
-            ctx.beginPath(); ctx.arc(headX, eyeY, this.r*0.12, 0, Math.PI*2); ctx.fill();
-            
-            ctx.fillStyle = 'black';
-            ctx.beginPath(); ctx.arc(headX + 2, -eyeY, this.r*0.05, 0, Math.PI*2); ctx.fill();
-            ctx.beginPath(); ctx.arc(headX + 2, eyeY, this.r*0.05, 0, Math.PI*2); ctx.fill();
-
-            if (this.className.includes('Spino')) {
-                ctx.fillStyle = '#a00';
-                ctx.beginPath(); ctx.moveTo(-this.r*0.6, 0); ctx.quadraticCurveTo(0, -this.r*1.2, this.r*0.6, 0); ctx.fill(); ctx.stroke();
-            }
-            if (this.className.includes('Stego')) {
-                ctx.fillStyle = '#ddd';
-                for(let i=-1; i<=1; i+=0.5) {
-                    ctx.beginPath(); ctx.moveTo(i*this.r*0.6, -this.r*0.4); ctx.lineTo(i*this.r*0.6 + 5, -this.r*0.9); ctx.lineTo(i*this.r*0.6 + 10, -this.r*0.4); ctx.fill(); ctx.stroke();
-                    ctx.beginPath(); ctx.moveTo(i*this.r*0.6, this.r*0.4); ctx.lineTo(i*this.r*0.6 + 5, this.r*0.9); ctx.lineTo(i*this.r*0.6 + 10, this.r*0.4); ctx.fill(); ctx.stroke();
-                }
-            }
-            
-            ctx.restore();
-        } // End of Procedural Rendering
+             // Fallback for missing sprites (simple circle)
+             ctx.fillStyle = this.color;
+             ctx.beginPath();
+             ctx.arc(0, 0, this.r, 0, Math.PI * 2);
+             ctx.fill();
+        }
 
         // --- DRAW ORBITALS (SAWS) ---
         if (this.orbitals && this.orbitals.length > 0) {
@@ -2080,15 +2472,540 @@ class Particle {
     }
 }
 
+// --- Stage Objectives ---
+class JewelObjective {
+    constructor(jewelType, x, y) {
+        this.kind = 'jewel';
+        this.jewelType = jewelType;
+        this.x = x;
+        this.y = y;
+        this.r = 22;
+        this.t = rand(0, Math.PI * 2);
+        this.dead = false;
+    }
+    update(dt) {
+        this.t += dt * 3.5;
+    }
+    draw(ctx) {
+        const pulse = 1 + Math.sin(this.t * 2.2) * 0.08;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(pulse, pulse);
+        ctx.shadowBlur = 18;
+        ctx.shadowColor = this.jewelType.color;
+        ctx.fillStyle = this.jewelType.color;
+        ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, -this.r);
+        ctx.lineTo(this.r * 0.75, 0);
+        ctx.lineTo(0, this.r);
+        ctx.lineTo(-this.r * 0.75, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(0, -this.r * 0.75);
+        ctx.lineTo(this.r * 0.35, 0);
+        ctx.lineTo(0, this.r * 0.15);
+        ctx.lineTo(-this.r * 0.35, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+class GateObjective {
+    constructor(x, y) {
+        this.kind = 'gate';
+        this.x = x;
+        this.y = y;
+        this.r = 90;
+        this.unlocked = false;
+        this.artifactRevealed = false;
+        this.hintCooldown = 0;
+    }
+    update(dt) {
+        if (this.hintCooldown > 0) this.hintCooldown -= dt;
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        const glow = this.unlocked ? 18 : 8;
+        const color = this.unlocked ? '#7bffb3' : '#777';
+        ctx.shadowBlur = glow;
+        ctx.shadowColor = color;
+
+        // Base
+        ctx.fillStyle = 'rgba(0,0,0,0.35)';
+        ctx.fillRect(-this.r * 0.55, this.r * 0.15, this.r * 1.1, this.r * 0.35);
+
+        // Arch
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.r * 0.55, Math.PI, 0);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-this.r * 0.55, 0);
+        ctx.lineTo(-this.r * 0.55, this.r * 0.45);
+        ctx.moveTo(this.r * 0.55, 0);
+        ctx.lineTo(this.r * 0.55, this.r * 0.45);
+        ctx.stroke();
+
+        // Lock rune
+        if (!this.unlocked) {
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#ffcc66';
+            ctx.font = 'bold 18px Ubuntu';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('LOCKED', 0, this.r * 0.25);
+        } else {
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.font = 'bold 18px Ubuntu';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('OPEN', 0, this.r * 0.25);
+        }
+        ctx.restore();
+    }
+}
+
+class BossArtifactObjective {
+    constructor(x, y) {
+        this.kind = 'artifact';
+        this.x = x;
+        this.y = y;
+        this.r = 32;
+        this.t = rand(0, Math.PI * 2);
+        this.dead = false;
+    }
+    update(dt) {
+        this.t += dt * 4.0;
+    }
+    draw(ctx) {
+        const pulse = 1 + Math.sin(this.t * 2.0) * 0.12;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(pulse, pulse);
+
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = '#ff66ff';
+        ctx.fillStyle = 'rgba(140, 60, 220, 0.8)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+        ctx.lineWidth = 3;
+
+        ctx.beginPath();
+        ctx.arc(0, 0, this.r * 0.75, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = 'bold 14px Ubuntu';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('TOUCH', 0, 0);
+        ctx.restore();
+    }
+}
+
+class MosasaurThreat {
+    constructor(config) {
+        this.config = config;
+        this.timeInWater = 0;
+        this.cooldown = 0;
+        this.warned = false;
+        this.panicWarned = false;
+        this.attack = null;
+        this.t = rand(0, Math.PI * 2);
+        this.inWaterPrev = false;
+        this.stalking = false;
+        this.safeThisEntry = false;
+        this.danger = 0;
+        this.noticeCooldown = 0;
+        this.rollTimer = 0;
+        this.beepTimer = 0;
+        this.shadowAngle = rand(0, Math.PI * 2);
+        this.shadowX = 0;
+        this.shadowY = 0;
+        this.source = { name: 'Mosasaur', takeDamage: () => {} };
+    }
+
+    reset() {
+        this.timeInWater = 0;
+        this.cooldown = 0;
+        this.warned = false;
+        this.panicWarned = false;
+        this.attack = null;
+        this.stalking = false;
+        this.safeThisEntry = false;
+        this.inWaterPrev = false;
+        this.danger = 0;
+        this.noticeCooldown = 0;
+        this.rollTimer = 0;
+        this.beepTimer = 0;
+    }
+
+    maybeNotify(text, chance = 1.0, cooldown = 3.0) {
+        if (this.noticeCooldown > 0) return;
+        if (Math.random() > chance) return;
+        showNotification(text);
+        this.noticeCooldown = cooldown;
+    }
+
+    onEnterWater() {
+        this.timeInWater = 0;
+        this.warned = false;
+        this.panicWarned = false;
+        this.danger = 0;
+        this.rollTimer = 0;
+        this.beepTimer = 0;
+
+        if (this.cooldown > 0) {
+            this.stalking = false;
+            this.safeThisEntry = true;
+            return;
+        }
+
+        const entryChance = (typeof this.config.entryChance === 'number') ? this.config.entryChance : 0.35;
+        this.stalking = Math.random() < entryChance;
+        this.safeThisEntry = !this.stalking;
+
+        if (this.safeThisEntry) {
+            this.maybeNotify("The water seems calm... for now.", 0.12, 6.0);
+        }
+    }
+
+    onExitWater() {
+        setWaterWarning(null);
+
+        if (this.attack) return;
+
+        if (this.stalking) {
+            if (this.panicWarned) {
+                this.maybeNotify("You made it across... lucky.", 0.9, 4.0);
+            } else if (this.warned) {
+                this.maybeNotify("You escape the ripples.", 0.6, 4.0);
+            }
+            this.cooldown = Math.max(this.cooldown, (typeof this.config.cooldown === 'number' ? this.config.cooldown : 10) * 0.25);
+        } else if (this.safeThisEntry && this.timeInWater > 5) {
+            this.maybeNotify("Clean crossing. No teeth today.", 0.15, 7.0);
+        }
+
+        this.timeInWater = 0;
+        this.warned = false;
+        this.panicWarned = false;
+        this.stalking = false;
+        this.safeThisEntry = false;
+        this.danger = 0;
+        this.rollTimer = 0;
+        this.beepTimer = 0;
+    }
+
+    startAttack(player) {
+        let x = player.x, y = player.y;
+        let found = false;
+
+        for (let i = 0; i < 12; i++) {
+            const a = rand(0, Math.PI * 2);
+            const dist = rand(650, 1100);
+            const tx = clamp(player.x + Math.cos(a) * dist, 200, CONFIG.mapWidth - 200);
+            const ty = clamp(player.y + Math.sin(a) * dist, 200, CONFIG.mapHeight - 200);
+            if (isWaterTile(getTileAtWorld(tx, ty))) {
+                x = tx; y = ty; found = true; break;
+            }
+        }
+
+        if (!found) {
+            // As a fallback, attack from the player's current water position.
+            x = player.x; y = player.y;
+        }
+
+        this.attack = { x, y, r: 75, life: 3.0 };
+        this.cooldown = typeof this.config.cooldown === 'number' ? this.config.cooldown : 10;
+        this.timeInWater = 0;
+        this.warned = false;
+        this.panicWarned = true;
+        showNotification("MOSASAUR! GET OUT OF THE WATER!");
+        AudioSys.playTone(60, 'sawtooth', 0.4, 0.12, 'mosa_warn');
+    }
+
+    update(dt, player) {
+        this.t += dt * 2.0;
+        if (this.cooldown > 0) this.cooldown -= dt;
+        if (this.noticeCooldown > 0) this.noticeCooldown -= dt;
+
+        const inWater = isWaterTile(getTileAtWorld(player.x, player.y));
+
+        if (inWater && !this.inWaterPrev) this.onEnterWater();
+        if (!inWater && this.inWaterPrev) this.onExitWater();
+        this.inWaterPrev = inWater;
+
+        if (this.attack) {
+            const a = this.attack;
+            const speed = typeof this.config.speed === 'number' ? this.config.speed : 1100;
+            const dx = player.x - a.x;
+            const dy = player.y - a.y;
+            const dist = Math.hypot(dx, dy) || 1;
+
+            a.x += (dx / dist) * speed * dt;
+            a.y += (dy / dist) * speed * dt;
+            a.life -= dt * (inWater ? 1 : 2.0);
+
+            if (inWater && dist < player.r + a.r) {
+                const biteMult = typeof this.config.biteDamageMult === 'number' ? this.config.biteDamageMult : 1.2;
+                const damage = Math.max(1, player.maxHealth * biteMult);
+                player.takeDamage(damage, this.source, 'mosa');
+                if (!player.dead) {
+                    player.invulnerableTimer = Math.max(player.invulnerableTimer, 1.25);
+                    const ang = Math.atan2(player.y - a.y, player.x - a.x);
+                    player.vx += Math.cos(ang) * 1100;
+                    player.vy += Math.sin(ang) * 1100;
+                    for (let i = 0; i < 18; i++) particles.push(new Particle(player.x, player.y, '#66ddff'));
+                    this.maybeNotify("You barely escape the Mosasaur!", 1.0, 4.0);
+                }
+                a.life = 0;
+            }
+
+            if (inWater) setWaterWarning("MOSASAUR ATTACKING!", '#ff4d6d');
+            else setWaterWarning(null);
+
+            if (a.life <= 0) {
+                this.attack = null;
+                setWaterWarning(null);
+                this.onExitWater();
+            }
+            return;
+        }
+
+        if (!inWater) {
+            setWaterWarning(null);
+            return;
+        }
+
+        if (this.cooldown > 0) {
+            setWaterWarning(null);
+            return;
+        }
+
+        // Dice-roll stalking: many crossings are safe, but lingering can still trigger danger.
+        this.timeInWater += dt;
+
+        if (!this.stalking) {
+            const lingerTime = typeof this.config.lingerTime === 'number' ? this.config.lingerTime : 12;
+            const lingerChance = typeof this.config.lingerChancePerSecond === 'number' ? this.config.lingerChancePerSecond : 0.08;
+
+            if (this.timeInWater > lingerTime && Math.random() < (lingerChance * dt)) {
+                this.stalking = true;
+                this.safeThisEntry = false;
+                this.warned = false;
+                this.panicWarned = false;
+                this.rollTimer = 0;
+                this.beepTimer = 0;
+                this.maybeNotify("The water stirs...", 1.0, 4.0);
+            } else {
+                setWaterWarning(null);
+                return;
+            }
+        }
+
+        const warningTime = typeof this.config.warningTime === 'number' ? this.config.warningTime : 4;
+        const attackTime = typeof this.config.attackTime === 'number' ? this.config.attackTime : 9;
+
+        const denom = Math.max(0.001, attackTime - warningTime);
+        const rawDanger = (this.timeInWater - warningTime) / denom;
+        this.danger = clamp(rawDanger, 0, 1);
+
+        // Update shadow orbit (pre-attack telegraph)
+        this.shadowAngle += dt * (0.7 + this.danger * 1.1);
+        const shadowDist = 420 - this.danger * 260;
+        this.shadowX = player.x + Math.cos(this.shadowAngle) * shadowDist;
+        this.shadowY = player.y + Math.sin(this.shadowAngle) * shadowDist;
+        if (!isWaterTile(getTileAtWorld(this.shadowX, this.shadowY))) {
+            this.shadowX = player.x;
+            this.shadowY = player.y;
+        }
+
+        // Escalating warnings
+        if (!this.warned && this.timeInWater > warningTime) {
+            this.warned = true;
+            this.maybeNotify("Ripples... something huge is nearby.", 1.0, 3.0);
+            AudioSys.playTone(120, 'sine', 0.15, 0.08, 'mosa_ripple');
+        }
+        if (!this.panicWarned && this.danger > 0.85) {
+            this.panicWarned = true;
+            this.maybeNotify("LEAVE THE WATER NOW!", 1.0, 2.5);
+            AudioSys.playTone(220, 'square', 0.2, 0.12, 'mosa_panic');
+            AudioSys.playTone(110, 'square', 0.25, 0.12, 'mosa_panic2');
+        }
+
+        // HUD warning (very clear)
+        if (this.danger <= 0.01 && this.timeInWater < warningTime) {
+            setWaterWarning("MOSASAUR THREAT: LOW", '#ffd37a');
+        } else if (this.danger < 0.6) {
+            setWaterWarning("MOSASAUR THREAT: MEDIUM", '#ffb703');
+        } else {
+            setWaterWarning("MOSASAUR THREAT: HIGH — LEAVE WATER!", '#ff4d6d');
+        }
+
+        // Beeping sonar cue, faster as danger rises
+        if (this.warned) {
+            this.beepTimer -= dt;
+            if (this.beepTimer <= 0) {
+                const interval = clamp(1.15 - this.danger * 0.9, 0.22, 1.15);
+                const freq = 140 + this.danger * 260;
+                const vol = 0.035 + this.danger * 0.06;
+                AudioSys.playTone(freq, 'sine', 0.06, vol, 'mosa_beep');
+                this.beepTimer = interval;
+            }
+        }
+
+        // Attack starts via repeated rolls once the threat is "hot"
+        if (this.timeInWater > attackTime) {
+            const rollInterval = typeof this.config.rollInterval === 'number' ? this.config.rollInterval : 1.0;
+            const baseChance = typeof this.config.attackChancePerSecond === 'number' ? this.config.attackChancePerSecond : 0.25;
+            const ramp = typeof this.config.attackChanceRamp === 'number' ? this.config.attackChanceRamp : 0.06;
+            const maxChance = typeof this.config.attackMaxChance === 'number' ? this.config.attackMaxChance : 0.85;
+
+            this.rollTimer -= dt;
+            if (this.rollTimer <= 0) {
+                const secondsHot = this.timeInWater - attackTime;
+                const chance = clamp(baseChance + secondsHot * ramp, 0, maxChance);
+                if (Math.random() < chance) {
+                    this.startAttack(player);
+                    return;
+                }
+                this.rollTimer = rollInterval;
+            }
+        }
+    }
+
+    draw(ctx, viewX, viewY, viewW, viewH, player) {
+        if (!player) return;
+
+        const inView = (x, y, r) => (
+            x + r > viewX &&
+            x - r < viewX + viewW &&
+            y + r > viewY &&
+            y - r < viewY + viewH
+        );
+
+        const drawRipples = (x, y, intensity = 1) => {
+            const base = 18 + Math.sin(this.t * 2.2) * 4;
+            for (let i = 0; i < 4; i++) {
+                const rr = base + i * 20;
+                const a = 0.10 * intensity * (1 - i * 0.12);
+                ctx.strokeStyle = `rgba(200, 255, 255, ${a})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(x, y, rr, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        };
+
+        if (this.attack) {
+            const a = this.attack;
+            if (!inView(a.x, a.y, a.r + 60)) return;
+
+            drawRipples(a.x, a.y, 1.6);
+            ctx.save();
+            ctx.translate(a.x, a.y);
+            
+            if (mosasaurusImage.complete && mosasaurusImage.naturalWidth > 0) {
+                 const frameW = 256;
+                 const frameH = 256;
+                 const frame = Math.floor(Date.now() / 150) % 4;
+                 const row = 2; // Attack row
+                 
+                 // Face player
+                 if (player && player.x < a.x) ctx.scale(-1, 1);
+                 
+                 const drawH = a.r * 3.5;
+                 const drawW = drawH * (frameW / frameH);
+                 
+                 ctx.shadowBlur = 25;
+                 ctx.shadowColor = 'rgba(0, 255, 255, 0.6)';
+                 
+                 ctx.drawImage(mosasaurusImage, frame * frameW, row * frameH, frameW, frameH, -drawW * 0.55, -drawH/2, drawW, drawH);
+            } else {
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = 'rgba(0, 255, 255, 0.6)';
+                ctx.fillStyle = 'rgba(0, 120, 140, 0.9)';
+                ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, a.r * 1.1, a.r * 0.55, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                // Fin
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = 'rgba(0, 180, 200, 0.9)';
+                ctx.beginPath();
+                ctx.moveTo(-a.r * 0.2, 0);
+                ctx.lineTo(0, -a.r * 0.9);
+                ctx.lineTo(a.r * 0.2, 0);
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.restore();
+            return;
+        }
+
+        if (this.stalking && isWaterTile(getTileAtWorld(player.x, player.y))) {
+            const shadowStart = (typeof this.config.warningTime === 'number' ? this.config.warningTime : 4) * 0.6;
+            if (this.timeInWater > shadowStart && inView(this.shadowX, this.shadowY, 220)) {
+                const alpha = 0.12 + this.danger * 0.22;
+                ctx.save();
+                ctx.translate(this.shadowX, this.shadowY);
+                ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 70 + this.danger * 95, 34 + this.danger * 55, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            const rippleIntensity = 0.7 + this.danger * 1.2;
+            if (inView(player.x, player.y, 160)) drawRipples(player.x, player.y, rippleIntensity);
+
+            // Final cue: red ring at very high danger
+            if (this.danger > 0.85 && inView(player.x, player.y, 200)) {
+                ctx.strokeStyle = `rgba(255, 60, 100, ${0.18 + Math.sin(this.t * 4) * 0.06})`;
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.arc(player.x, player.y, 120 + Math.sin(this.t * 5) * 10, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
 function handlePlayerDeath(killer) {
    respawnTimer = 3;
    const killerName = killer ? (killer.name || killer.className || 'Unknown') : 'Bad Luck';
+
+   runState.lives = Math.max(0, runState.lives - 1);
+   updateHud();
+
    document.getElementById('game-over-ui').style.display = 'block';
-   document.getElementById('respawn-text').innerText = "Respawning at Checkpoint...";
+
+   if (runState.lives > 0) {
+       document.getElementById('respawn-text').innerText = `Life lost. ${runState.lives}/${RUN_CONFIG.maxLives} remaining. Respawning...`;
+   } else {
+       runResetTimer = 4.0;
+       respawnTimer = runResetTimer;
+       document.getElementById('respawn-text').innerText = "Out of lives. Restarting run...";
+       setObjectiveText('');
+   }
+
    document.getElementById('ai-death-message').innerText = "✨ Analyzing defeat...";
-   
    AudioSys.playDeathSound();
-   
    getDeathMessage({level: player.level, score: Math.floor(player.score), killer: killerName});
 }
 
@@ -2104,10 +3021,10 @@ function refundStats() {
     player.points += totalPoints;
 
     // 2. Reset Class & Mutations
-    player.className = "Baby Dino";
-    player.classDef = CLASS_DEFS['Baby Dino'];
-    player.tier = 0;
-    player.scaleMult = 1.0;
+    const species = player.className;
+    player.classDef = CLASS_DEFS[species] || CLASS_DEFS['Baby Dino'];
+    player.tier = player.classDef.tier || 0;
+    player.scaleMult = player.classDef.scale || 1.0;
     
     // Reset Guns to Starter
     player.guns = JSON.parse(JSON.stringify(player.classDef.guns));
@@ -2127,10 +3044,9 @@ function refundStats() {
     // 3. Recalculate & UI
     player.recalcStats();
     updateUpgradeUi();
-    checkClassUpgrades(); // Re-trigger class selection
+    checkWeaponUpgrades(); // Re-trigger weapon upgrades if any
     
     showNotification("Full Respec Complete!");
-    saveGame();
 }
 
 function saveGame(silent = false) {
@@ -2198,24 +3114,54 @@ function loadGame() {
 }
 
 // --- TERRAIN SYSTEM ---
-const TILES = { DIRT: 0, GRASS: 1, WATER: 2, LAVA: 3 };
-const TILE_COLORS = ['#2d241b', '#0b400b', '#002b36', '#401a1a']; 
+const TILES = { DIRT: 0, GRASS: 1, WATER: 2, LAVA: 3, ICE: 4, FROZEN_LAVA: 5 };
+const TILE_COLORS = ['#2d241b', '#0b400b', '#002b36', '#401a1a', '#aaddff', '#88aabb']; 
 let terrainGrid = [];
 const terrainImage = new Image();
-terrainImage.src = 'terrain.jpg';
 const babyDinoImage = new Image();
-babyDinoImage.src = 'babyDino.png';
+const raptorImage = new Image();
+const dilophosaurImage = new Image();
+const stegosaurusImage = new Image(); // Using Ankylosaurus sprite
+const pterodactylImage = new Image(); // Using Quetzalcoatlus sprite
+const triceratopsImage = new Image();
+const giganotosaurusImage = new Image(); // Using Distortus Rex sprite
+const spinosaurusImage = new Image();
+const archaeopteryxImage = new Image(); // Using Aquilops sprite
+const titanosaurImage = new Image();
+const indominusImage = new Image();
+const trexImage = new Image();
+const velociraptorImage = new Image(); // Using Raptor sprite
+const mosasaurusImage = new Image();
+
+babyDinoImage.src = 'spritesheets/babyDino.png';
+raptorImage.src = 'spritesheets/raptor.png';
+dilophosaurImage.src = 'spritesheets/dilophosaurus.png';
+stegosaurusImage.src = 'spritesheets/anklyosaurus.png';
+pterodactylImage.src = 'spritesheets/Quetzalcoatlus.png';
+triceratopsImage.src = 'spritesheets/triceratops.png';
+giganotosaurusImage.src = 'spritesheets/distortusRex.png';
+spinosaurusImage.src = 'spritesheets/spinosaurus.png';
+archaeopteryxImage.src = 'spritesheets/aquilops.png';
+titanosaurImage.src = 'spritesheets/titanosaurus.png';
+indominusImage.src = 'spritesheets/indominousRex.png';
+trexImage.src = 'spritesheets/trex.png';
+velociraptorImage.src = 'spritesheets/raptor.png';
+mosasaurusImage.src = 'spritesheets/mosasaurus.png';
 const lootImage = new Image();
-lootImage.src = 'loot.png';
+lootImage.src = 'spritesheets/loot.png';
 const projectileImage = new Image();
-projectileImage.src = 'projectiles.png';
+projectileImage.src = 'spritesheets/projectiles.png';
 const iconImage = new Image();
-iconImage.src = 'icons.png';
+iconImage.src = 'spritesheets/icons.png';
 
 function generateMap() {
     const cols = CONFIG.mapWidth / CONFIG.gridSize;
     const rows = CONFIG.mapHeight / CONFIG.gridSize;
     terrainGrid = new Array(cols).fill(0).map(() => new Array(rows).fill(TILES.DIRT));
+
+    if (currentStageDef && currentStageDef.terrainSrc && terrainImage.src.indexOf(currentStageDef.terrainSrc) === -1) {
+        terrainImage.src = currentStageDef.terrainSrc;
+    }
 
     const drawBlob = (type, count, minR, maxR) => {
         for(let i=0; i<count; i++) {
@@ -2234,9 +3180,21 @@ function generateMap() {
         }
     };
 
-    drawBlob(TILES.GRASS, 50, 1, 3); // More grass for jungle
-    drawBlob(TILES.WATER, 20, 1, 2);
-    drawBlob(TILES.LAVA, 8, 1, 1);
+    const stageTerrain = (currentStageDef && currentStageDef.terrain) ? currentStageDef.terrain : STAGE_DEFS[0].terrain;
+
+    // Determine Tile Types based on Level
+    let waterType = TILES.WATER;
+    let lavaType = TILES.LAVA;
+    
+    if (currentStageDef && currentStageDef.name === 'Level 2') {
+        waterType = TILES.ICE;
+        lavaType = TILES.FROZEN_LAVA;
+    }
+
+    drawBlob(TILES.GRASS, stageTerrain.grass.count, stageTerrain.grass.minR, stageTerrain.grass.maxR);
+    drawBlob(waterType, stageTerrain.waterSmall.count, stageTerrain.waterSmall.minR, stageTerrain.waterSmall.maxR);
+    drawBlob(waterType, stageTerrain.waterBig.count, stageTerrain.waterBig.minR, stageTerrain.waterBig.maxR);
+    drawBlob(lavaType, stageTerrain.lava.count, stageTerrain.lava.minR, stageTerrain.lava.maxR);
 }
 
 function drawTerrain(ctx, viewX, viewY, viewW, viewH) {
@@ -2259,14 +3217,14 @@ function drawTerrain(ctx, viewX, viewY, viewW, viewH) {
                 // Mapping:
                 // Grass (1): Top-Left (0,0)
                 // Dirt (0): Top-Right (1,0)
-                // Water (2): Bottom-Left (0,1)
-                // Lava (3): Bottom-Right (1,1)
+                // Water (2) / Ice (4): Bottom-Left (0,1)
+                // Lava (3) / Frozen Lava (5): Bottom-Right (1,1)
                 
                 let sx = 0, sy = 0;
                 if (t === TILES.DIRT) { sx = tW; sy = 0; }
                 else if (t === TILES.GRASS) { sx = 0; sy = 0; }
-                else if (t === TILES.WATER) { sx = 0; sy = tH; }
-                else if (t === TILES.LAVA) { sx = tW; sy = tH; }
+                else if (t === TILES.WATER || t === TILES.ICE) { sx = 0; sy = tH; }
+                else if (t === TILES.LAVA || t === TILES.FROZEN_LAVA) { sx = tW; sy = tH; }
                 
                 // Draw slightly overlapping to prevent bleeding lines
                 ctx.drawImage(terrainImage, sx, sy, tW, tH, posX, posY, CONFIG.gridSize + 1, CONFIG.gridSize + 1);
@@ -2286,31 +3244,408 @@ function drawTerrain(ctx, viewX, viewY, viewW, viewH) {
             } else if (t === TILES.LAVA && Math.random() < 0.02) {
                 ctx.fillStyle = '#ffaa00';
                 ctx.fillRect(posX + rand(10,90), posY + rand(10,90), 4, 4);
+            } else if (t === TILES.ICE || t === TILES.FROZEN_LAVA) {
+                 // Sparkle for ice
+                 if (Math.random() < 0.005) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fillRect(posX + rand(5,95), posY + rand(5,95), 3, 3);
+                 }
             }
         }
     }
+}
+
+function getStageDef(stageIndex) {
+    const idx = Math.max(0, Math.min(STAGE_DEFS.length - 1, stageIndex));
+    return STAGE_DEFS[idx];
+}
+
+function getTileAtWorld(x, y) {
+    const tx = Math.floor(x / CONFIG.gridSize);
+    const ty = Math.floor(y / CONFIG.gridSize);
+    if (!terrainGrid || !terrainGrid[tx] || terrainGrid[tx][ty] === undefined) return null;
+    return terrainGrid[tx][ty];
+}
+
+function isLandTile(tile) {
+    return tile !== null && tile !== TILES.WATER && tile !== TILES.LAVA;
+}
+
+function isWaterTile(tile) {
+    return tile === TILES.WATER;
+}
+
+function findWorldPosition({ tileOk, margin = 200, maxAttempts = 250, avoid = [] }) {
+    for (let i = 0; i < maxAttempts; i++) {
+        const x = rand(margin, CONFIG.mapWidth - margin);
+        const y = rand(margin, CONFIG.mapHeight - margin);
+        const tile = getTileAtWorld(x, y);
+        if (!tileOk(tile)) continue;
+
+        let ok = true;
+        for (const a of avoid) {
+            const minD = a.minDist || 0;
+            const d = Math.hypot(x - a.x, y - a.y);
+            if (d < minD) { ok = false; break; }
+        }
+        if (!ok) continue;
+
+        return { x, y };
+    }
+    return { x: CONFIG.mapWidth / 2, y: CONFIG.mapHeight / 2 };
+}
+
+function hideOverlays() {
+    document.getElementById('game-over-ui').style.display = 'none';
+    document.getElementById('reward-overlay').style.display = 'none';
+    document.getElementById('run-complete-ui').style.display = 'none';
+}
+
+function setObjectiveText(text) {
+    const el = document.getElementById('objective-text');
+    if (!el) return;
+    el.innerText = text || '';
+}
+
+function setWaterWarning(text, color = null) {
+    const el = document.getElementById('water-warning');
+    if (!el) return;
+    if (!text) {
+        el.style.display = 'none';
+        el.innerText = '';
+        return;
+    }
+    el.style.display = 'block';
+    el.innerText = text;
+    if (color) el.style.color = color;
+}
+
+function createStageState(stageIndex) {
+    const def = getStageDef(stageIndex);
+    return {
+        def,
+        jewelTotal: def.jewelTotal,
+        jewelsCollected: 0,
+        jewels: [],
+        gate: null,
+        artifact: null,
+        bossSpawned: false,
+        bossDefeated: false,
+        mosasaur: def.mosasaur ? new MosasaurThreat(def.mosasaur) : null,
+    };
+}
+
+function spawnStageObjectives() {
+    if (!stageState) return;
+
+    stageState.jewels.length = 0;
+    stageState.jewelsCollected = 0;
+    stageState.gate = null;
+    stageState.artifact = null;
+    stageState.bossSpawned = false;
+    stageState.bossDefeated = false;
+
+    const stageDef = stageState.def;
+    const avoid = [{ x: runState.spawnX, y: runState.spawnY, minDist: 900 }];
+
+    const waterJewelCount = Math.max(0, Math.min(stageDef.waterJewelCount || 0, stageDef.jewelTotal));
+    const waterJewelIndices = new Set();
+    while (waterJewelIndices.size < waterJewelCount) {
+        waterJewelIndices.add(Math.floor(rand(0, stageDef.jewelTotal)));
+    }
+
+    for (let i = 0; i < stageDef.jewelTotal; i++) {
+        const jewelType = JEWEL_TYPES[i % JEWEL_TYPES.length];
+        const isWater = waterJewelIndices.has(i);
+        const pos = findWorldPosition({
+            tileOk: (t) => isWater ? isWaterTile(t) : isLandTile(t),
+            margin: 250,
+            maxAttempts: 500,
+            avoid,
+        });
+        const jewel = new JewelObjective(jewelType, pos.x, pos.y);
+        stageState.jewels.push(jewel);
+        avoid.push({ x: pos.x, y: pos.y, minDist: 700 });
+    }
+
+    const gatePos = findWorldPosition({
+        tileOk: (t) => isLandTile(t),
+        margin: 300,
+        maxAttempts: 500,
+        avoid: [...avoid, { x: runState.spawnX, y: runState.spawnY, minDist: 2200 }],
+    });
+    stageState.gate = new GateObjective(gatePos.x, gatePos.y);
+}
+
+function startRun() {
+    runState.stageIndex = 0;
+    runState.lives = RUN_CONFIG.maxLives;
+    runState.score = 0;
+    runState.selectedSpecies = 'Baby Dino';
+    startStage(0, runState.selectedSpecies);
+}
+
+function startStage(stageIndex, species) {
+    hideOverlays();
+    document.getElementById('class-upgrade-menu').innerHTML = '';
+    document.getElementById('reward-menu').innerHTML = '';
+    setWaterWarning(null);
+    
+    // Audio Management
+    if (stageIndex === 0) {
+        AudioSys.resumeNormalMusic();
+    } else if (AudioSys.victoryMusic && AudioSys.victoryMusic.paused) {
+        AudioSys.resumeNormalMusic();
+    }
+
+    const stageDef = getStageDef(stageIndex);
+    currentStageDef = stageDef;
+    runState.stageIndex = stageIndex;
+    runState.selectedSpecies = species;
+
+    boss = null;
+    bossArena = null;
+    respawnTimer = 3;
+    runResetTimer = 0;
+    gameMode = 'play';
+
+    entities = [];
+    powerUps = [];
+    particles = [];
+    damageNumbers = [];
+    explosions = [];
+
+    stageState = createStageState(stageIndex);
+
+    generateMap();
+
+    const spawn = findWorldPosition({
+        tileOk: (t) => isLandTile(t),
+        margin: 350,
+        maxAttempts: 600,
+        avoid: [],
+    });
+    runState.spawnX = spawn.x;
+    runState.spawnY = spawn.y;
+
+    player = new Dino(runState.spawnX, runState.spawnY, true);
+    player.name = "You";
+    player.evolve(species);
+    player.score = runState.score;
+    player.recalcStats();
+    player.health = player.maxHealth;
+    const startInvuln = stageDef.spawn?.startInvulnerable || 0;
+    if (startInvuln > 0) player.invulnerableTimer = startInvuln;
+    entities.push(player);
+
+    // Baseline world population (kept lighter than endless mode)
+    const initialShapes = stageDef.spawn?.initialShapes ?? 500;
+    const initialPowerUps = stageDef.spawn?.initialPowerUps ?? 14;
+    const initialEnemies = stageDef.spawn?.initialEnemies ?? (8 + stageIndex * 2);
+    for (let i = 0; i < initialShapes; i++) spawnShape();
+    for (let i = 0; i < initialPowerUps; i++) spawnPowerUp();
+    for (let i = 0; i < initialEnemies; i++) spawnEnemy();
+
+    spawnStageObjectives();
+    setObjectiveText(`Collect ${stageState.jewelTotal} jewels to unlock the gate.`);
+    updateHud();
+}
+
+function getDifficultyLevel() {
+    const base = player ? player.level : 1;
+    const offset = (stageState && stageState.def && typeof stageState.def.difficultyOffset === 'number') ? stageState.def.difficultyOffset : 0;
+    return base + offset;
+}
+
+function updateStageObjectives(dt) {
+    if (!stageState || !player || player.dead) return;
+
+    // Jewels
+    for (let i = stageState.jewels.length - 1; i >= 0; i--) {
+        const jewel = stageState.jewels[i];
+        jewel.update(dt);
+        const d = Math.hypot(player.x - jewel.x, player.y - jewel.y);
+        if (d < player.r + jewel.r) {
+            stageState.jewels.splice(i, 1);
+            stageState.jewelsCollected++;
+            showNotification(`Collected ${jewel.jewelType.name}! (${stageState.jewelsCollected}/${stageState.jewelTotal})`);
+            AudioSys.playTone(880, 'sine', 0.12, 0.1, 'jewel');
+            updateHud();
+
+            if (stageState.jewelsCollected >= stageState.jewelTotal && stageState.gate && !stageState.gate.unlocked) {
+                stageState.gate.unlocked = true;
+                showNotification("Gate Unlocked!");
+                setObjectiveText("Find the gate and touch it.");
+            }
+        }
+    }
+
+    // Gate
+    const gate = stageState.gate;
+    if (gate) {
+        gate.update(dt);
+        const d = Math.hypot(player.x - gate.x, player.y - gate.y);
+        if (d < player.r + gate.r * 0.55) {
+            if (!gate.unlocked) {
+                if (gate.hintCooldown <= 0) {
+                    showNotification(`Gate Locked (${stageState.jewelsCollected}/${stageState.jewelTotal})`);
+                    gate.hintCooldown = 2.5;
+                }
+            } else if (stageState.bossSpawned && boss && !boss.dead) {
+                if (gate.hintCooldown <= 0) {
+                    showNotification("The boss is already awake — follow the purple marker on the minimap!");
+                    gate.hintCooldown = 3.0;
+                }
+            } else if (!gate.artifactRevealed && !stageState.artifact) {
+                gate.artifactRevealed = true;
+                stageState.artifact = new BossArtifactObjective(gate.x, gate.y - gate.r * 0.35);
+                showNotification("An ancient artifact has been revealed!");
+                setObjectiveText("Touch the artifact to awaken the boss.");
+            }
+        }
+    }
+
+    // Artifact
+    if (stageState.artifact) {
+        stageState.artifact.update(dt);
+        const d = Math.hypot(player.x - stageState.artifact.x, player.y - stageState.artifact.y);
+        if (d < player.r + stageState.artifact.r) {
+            stageState.artifact = null;
+            spawnBossForStage();
+        }
+    }
+}
+
+function spawnBossForStage() {
+    if (!stageState || stageState.bossSpawned) return;
+
+    const avoid = [{ x: player.x, y: player.y, minDist: 1600 }];
+    if (stageState.gate) avoid.push({ x: stageState.gate.x, y: stageState.gate.y, minDist: 900 });
+
+    const bossPos = findWorldPosition({
+        tileOk: (t) => isLandTile(t),
+        margin: 350,
+        maxAttempts: 800,
+        avoid,
+    });
+
+    stageState.bossSpawned = true;
+    setObjectiveText("Boss awakened! Follow the purple marker on the minimap and defeat it.");
+    showNotification("Boss marked on minimap!");
+
+    // Clear ambient enemies to focus the fight
+    entities = entities.filter(e => !(e instanceof Dino && !e.isPlayer && !e.isBoss));
+
+    spawnBoss(bossPos.x, bossPos.y);
+}
+
+function showSpeciesRewardMenu(nextSpeciesOptions) {
+    const overlay = document.getElementById('reward-overlay');
+    const menu = document.getElementById('reward-menu');
+    const subtitle = document.getElementById('reward-subtitle');
+
+    menu.innerHTML = '';
+    overlay.style.display = 'flex';
+    if (subtitle) subtitle.innerText = `Choose your species for ${getStageDef(runState.stageIndex + 1).name}.`;
+
+    // Pixel-perfect sprite centering for 800x400 sheet (Ratio 2.0)
+    const size = 64;
+    const ratio = 2.0;
+    const bgH = size * 4;
+    const bgW = bgH * ratio;
+    const cellW = bgW / 4;
+    const centerOffX = (cellW - size) / 2;
+
+    nextSpeciesOptions.forEach(species => {
+        const def = CLASS_DEFS[species];
+        if (!def) return;
+
+        const card = document.createElement('div');
+        card.className = 'class-card';
+
+        const label = def.label || species;
+        let iconRow = 3, iconCol = 3;
+        if (label.includes('Twin') || label.includes('Triple') || label.includes('Octo')) { iconRow = 2; iconCol = 1; }
+        else if (label.includes('Rail') || label.includes('Beam') || label.includes('Sniper')) { iconRow = 2; iconCol = 2; }
+        else if (label.includes('Flame') || label.includes('Inferno') || label.includes('Hydra')) { iconRow = 2; iconCol = 3; }
+        else if (label.includes('Launcher') || label.includes('Cluster') || label.includes('Nuke') || label.includes('Czar')) { iconRow = 3; iconCol = 0; }
+
+        const offX = - (iconCol * cellW) - centerOffX;
+        const offY = - (iconRow * size);
+
+        card.innerHTML = `<div class="class-card-icon" style="background-size: ${bgW}px ${bgH}px; background-position: ${offX}px ${offY}px"></div><div class="class-card-title">${species}</div><div class="class-card-desc">${label}</div>`;
+
+        card.onclick = () => {
+            overlay.style.display = 'none';
+            menu.innerHTML = '';
+            gameMode = 'play';
+            startStage(runState.stageIndex + 1, species);
+        };
+
+        menu.appendChild(card);
+    });
+}
+
+function handleBossDefeated() {
+    if (!stageState || stageState.bossDefeated) return;
+
+    stageState.bossDefeated = true;
+    boss = null;
+    bossArena = null;
+    document.getElementById('boss-bar-container').style.display = 'none';
+    
+    // Play Victory Music (Boss music paused inside this method)
+    AudioSys.playVictoryMusic();
+
+    // Show Victory UI
+    const victoryUi = document.getElementById('boss-slain-ui');
+    if (victoryUi) {
+        victoryUi.style.display = 'flex';
+    }
+
+    setObjectiveText('');
+
+    // Delay transition
+    setTimeout(() => {
+        if (victoryUi) victoryUi.style.display = 'none';
+
+        if (runState.stageIndex < RUN_CONFIG.totalStages - 1) {
+            gameMode = 'reward';
+            showSpeciesRewardMenu(stageState.def.nextSpeciesOptions || []);
+            return;
+        }
+
+        gameMode = 'complete';
+        const completeText = document.getElementById('run-complete-text');
+        if (completeText) completeText.innerText = `You cleared all available levels. Score: ${Math.floor(runState.score)} • Lives left: ${runState.lives}/${RUN_CONFIG.maxLives}`;
+        document.getElementById('run-complete-ui').style.display = 'block';
+    }, 4000);
+}
+
+function drawStageObjectives(ctx, viewX, viewY, viewW, viewH) {
+    if (!stageState) return;
+
+    const inView = (o) => (
+        o.x + o.r > viewX &&
+        o.x - o.r < viewX + viewW &&
+        o.y + o.r > viewY &&
+        o.y - o.r < viewY + viewH
+    );
+
+    stageState.jewels.forEach(j => {
+        if (inView(j)) j.draw(ctx);
+    });
+    if (stageState.gate && inView(stageState.gate)) stageState.gate.draw(ctx);
+    if (stageState.artifact && inView(stageState.artifact)) stageState.artifact.draw(ctx);
+    if (stageState.mosasaur) stageState.mosasaur.draw(ctx, viewX, viewY, viewW, viewH, player);
 }
 
 // Initialize
 init();
 
 function init() {
-    generateMap();
     resize();
     window.addEventListener('resize', resize);
-    
-    player = new Dino(CONFIG.mapWidth/2 - 500, CONFIG.mapHeight/2, true);
-    player.name = "You";
-    
-    // Try to load
-    loadGame();
-    
-    player.recalcStats();
-    entities.push(player);
-
-    for(let i=0; i<800; i++) spawnShape(); 
-    for(let i=0; i<20; i++) spawnPowerUp(); // Initial PowerUps
-    for(let i=0; i<10; i++) spawnEnemy();
 
     // Input listeners initiate Audio
     const startAudio = () => { 
@@ -2344,6 +3679,22 @@ function init() {
         }
 
         if (e.key === 'm') document.getElementById('minimap-container').classList.toggle('hidden');
+
+        // Debug: Shift + N to Skip Level
+        if (e.key === 'N' && e.shiftKey) {
+            if (runState.stageIndex < RUN_CONFIG.totalStages - 1) {
+                startStage(runState.stageIndex + 1, player.className);
+                showNotification("DEBUG: Skipped to Level " + (runState.stageIndex + 1));
+            } else {
+                showNotification("DEBUG: Last Level Reached");
+            }
+        }
+        
+        // Debug: Shift + B to Spawn Boss immediately
+        if (e.key === 'B' && e.shiftKey) {
+            spawnBossForStage();
+             showNotification("DEBUG: Boss Spawner Triggered");
+        }
     });
     window.addEventListener('keyup', e => {
         keys[e.key] = false;
@@ -2377,6 +3728,8 @@ function init() {
 
     setupTouch();
     setupUpgradeUI();
+
+    startRun();
     requestAnimationFrame(gameLoop);
 }
 
@@ -2390,6 +3743,10 @@ function resize() {
     
     width = canvas.width;
     height = canvas.height;
+    
+    // Enable high-quality smoothing for sprites
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     
     if (player) player.recalcStats();
 }
@@ -2449,93 +3806,143 @@ function spawnShape() {
 }
 
 function spawnEnemy() {
-    const angle = Math.random() * Math.PI * 2;
-    const dist = rand(900, 1400); 
-    let x = player.x + Math.cos(angle) * dist;
-    let y = player.y + Math.sin(angle) * dist;
-    
-    x = clamp(x, 0, CONFIG.mapWidth);
-    y = clamp(y, 0, CONFIG.mapHeight);
+    let x = 0, y = 0;
+    let valid = false;
+
+    for (let attempt = 0; attempt < 10; attempt++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = rand(900, 1400);
+        x = player.x + Math.cos(angle) * dist;
+        y = player.y + Math.sin(angle) * dist;
+
+        x = clamp(x, 120, CONFIG.mapWidth - 120);
+        y = clamp(y, 120, CONFIG.mapHeight - 120);
+
+        const tile = getTileAtWorld(x, y);
+        if (isLandTile(tile)) { valid = true; break; }
+    }
+
+    if (!valid) return;
 
     const enemy = new Dino(x, y, false);
     
-    const maxLvl = Math.min(player.level + 10, 9999); 
-    enemy.level = Math.floor(rand(Math.max(1, player.level - 50), maxLvl));
+    const enemyCfg = stageState?.def?.enemy || {};
+    const levelOffset = enemyCfg.levelOffset || 0;
+    const baseLevel = (player?.level || 1) + levelOffset;
+    const minLvl = Math.max(1, Math.floor(baseLevel + (enemyCfg.minDelta ?? -1)));
+    const maxLvl = Math.max(minLvl, Math.floor(baseLevel + (enemyCfg.maxDelta ?? 1)));
+    enemy.level = Math.floor(rand(minLvl, maxLvl + 1));
     
     enemy.evolve("Baby Dino"); 
     enemy.assignAIClass(); 
     
-    const traitRoll = Math.random();
-    if (traitRoll < 0.2) enemy.trait = 'armored';
-    else if (traitRoll < 0.4) enemy.trait = 'evasive';
-    else if (traitRoll < 0.6) enemy.trait = 'ablative';
-    else if (traitRoll < 0.7) enemy.trait = 'spiked';
-    else enemy.trait = null; 
+    const traitChance = enemyCfg.traitChance ?? 0.35;
+    if (Math.random() < traitChance) {
+        const r = Math.random();
+        if (r < 0.25) enemy.trait = 'armored';
+        else if (r < 0.5) enemy.trait = 'evasive';
+        else if (r < 0.75) enemy.trait = 'ablative';
+        else enemy.trait = 'spiked';
+    } else {
+        enemy.trait = null;
+    }
 
-    const isRanged = Math.random() < 0.2;
+    const rangedChance = enemyCfg.rangedChance ?? 0.2;
+    const isRanged = Math.random() < rangedChance;
     
     if (!isRanged) {
         enemy.behavior = 'melee';
         enemy.guns = []; 
-        enemy.bodyDamage *= 1.5; 
-        enemy.moveSpeed *= 1.1; 
     } else {
         enemy.behavior = 'ranged';
     }
 
-    for(let i=0; i<8; i++) enemy.stats[i] = rand(0, enemy.level/2);
+    const statsDiv = enemyCfg.statsDiv ?? 3;
+    for(let i=0; i<8; i++) enemy.stats[i] = rand(0, enemy.level / statsDiv);
     
     enemy.recalcStats();
+
+    // Apply behavior + stage tuning after stat recompute
+    if (!isRanged) {
+        enemy.bodyDamage *= 1.25;
+        enemy.moveSpeed *= 1.08;
+    }
+
+    const healthMult = enemyCfg.healthMult ?? 1.0;
+    const damageMult = enemyCfg.damageMult ?? 1.0;
+    const moveSpeedMult = enemyCfg.moveSpeedMult ?? 1.0;
+    enemy.maxHealth *= healthMult;
     enemy.health = enemy.maxHealth;
+    enemy.bodyDamage *= damageMult;
+    enemy.bulletDmg *= damageMult;
+    enemy.moveSpeed *= moveSpeedMult;
 
     entities.push(enemy);
 }
 
-function spawnBoss() {
+function spawnBoss(x, y) {
     if (boss && !boss.dead) return;
     
     const template = BOSS_TEMPLATES[Math.floor(Math.random() * BOSS_TEMPLATES.length)];
 
-    boss = new Dino(CONFIG.mapWidth/2, CONFIG.mapHeight/2, false);
+    const stageMult = 1 + runState.stageIndex * 0.65;
+    const diffLevel = getDifficultyLevel();
+    const levelMult = Math.max(1, diffLevel / 15);
+    const powerMult = stageMult * levelMult;
+
+    boss = new Dino(x, y, false);
     boss.isBoss = true;
     
     boss.name = template.name;
     boss.color = template.color;
     boss.trait = template.trait; 
     boss.guns = JSON.parse(JSON.stringify(template.guns)); 
-    
-    const levelMult = Math.max(1, player.level / 15);
-    
-    boss.r = 60 * template.scale * Math.min(3, Math.max(1, player.level/40)); 
-    boss.maxHealth = 8000 * template.hpMult * levelMult;
+
+    boss.r = 60 * template.scale * Math.min(3.5, 1 + runState.stageIndex * 0.35 + (diffLevel / 60)); 
+    boss.maxHealth = 9000 * template.hpMult * powerMult;
     boss.health = boss.maxHealth;
     
-    boss.bulletDmg = 10 * levelMult;
-    boss.xpValue = 5000 * levelMult;
+    boss.bulletDmg = 10 * powerMult;
+    boss.xpValue = 8000 * powerMult;
+
+    bossArena = { x: boss.x, y: boss.y, r: 750 + runState.stageIndex * 150 };
     
     entities.push(boss);
     
-    showNotification(`WARNING: ${boss.name} has spawned!`);
+    showNotification(`WARNING: ${boss.name} has awakened!`);
     const barContainer = document.getElementById('boss-bar-container');
     barContainer.style.display = 'block';
     document.getElementById('boss-name').innerText = boss.name.toUpperCase();
+    
+    AudioSys.playBossMusic();
 }
 
 function spawnPowerUp() {
     if (powerUps.length >= 30) return;
-    
-    const types = Object.keys(POWERUP_TYPES);
-    const type = types[Math.floor(Math.random() * types.length)];
-    
-    // Spawn somewhat near player
-    const angle = Math.random() * Math.PI * 2;
-    const dist = rand(400, 1500);
-    let x = player.x + Math.cos(angle) * dist;
-    let y = player.y + Math.sin(angle) * dist;
-    
-    x = clamp(x, 100, CONFIG.mapWidth - 100);
-    y = clamp(y, 100, CONFIG.mapHeight - 100);
-    
+
+    const baseTypes = Object.keys(POWERUP_TYPES).filter(t => t !== 'life');
+    const canSpawnLife = runState.lives < RUN_CONFIG.maxLives;
+    const type = (canSpawnLife && Math.random() < 0.02)
+        ? 'life'
+        : baseTypes[Math.floor(Math.random() * baseTypes.length)];
+
+    // Spawn somewhat near player on valid terrain (avoid water/lava)
+    let x = 0, y = 0;
+    let valid = false;
+
+    for (let i = 0; i < 8; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = rand(400, 1500);
+        x = player.x + Math.cos(angle) * dist;
+        y = player.y + Math.sin(angle) * dist;
+        x = clamp(x, 120, CONFIG.mapWidth - 120);
+        y = clamp(y, 120, CONFIG.mapHeight - 120);
+
+        const tile = getTileAtWorld(x, y);
+        if (isLandTile(tile)) { valid = true; break; }
+    }
+
+    if (!valid) return;
     powerUps.push(new PowerUp(x, y, type));
 }
 
@@ -2610,6 +4017,70 @@ function setupTouch() {
     setupStick('stick-right', joystickRight);
 }
 
+const SnowSystem = {
+    flakes: [],
+    maxFlakes: 150,
+    init: function() {
+        console.log("SnowSystem Init");
+        for(let i=0; i<this.maxFlakes; i++) {
+            this.flakes.push(this.createFlake(true));
+        }
+    },
+    createFlake: function(randomY=false) {
+        const w = width || window.innerWidth;
+        const h = height || window.innerHeight;
+        return {
+            x: Math.random() * w,
+            y: randomY ? Math.random() * h : -10,
+            r: Math.random() * 3 + 2,
+            speed: Math.random() * 80 + 50,
+            sway: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 2 + 1
+        };
+    },
+    update: function(dt) {
+        if (!currentStageDef || currentStageDef.name !== 'Level 2') return;
+        
+        // If flakes empty, init
+        if (this.flakes.length === 0) this.init();
+
+        const w = width || window.innerWidth;
+        const h = height || window.innerHeight;
+
+        this.flakes.forEach(f => {
+            f.y += f.speed * dt;
+            f.sway += f.swaySpeed * dt;
+            f.x += Math.sin(f.sway) * 20 * dt;
+            
+            if (player) {
+                f.x -= player.vx * dt * 0.5; 
+                f.y -= player.vy * dt * 0.5;
+            }
+
+            if (f.y > h) f.y = -10;
+            if (f.y < -10) f.y = h;
+            if (f.x > w) f.x = 0;
+            if (f.x < 0) f.x = w;
+        });
+    },
+    draw: function(ctx) {
+        if (!currentStageDef || currentStageDef.name !== 'Level 2') return;
+        
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0); 
+        ctx.fillStyle = '#e0ffff'; // Light Cyan
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = '#000'; // Dark shadow for contrast
+        ctx.beginPath();
+        this.flakes.forEach(f => {
+            ctx.moveTo(f.x + f.r, f.y); // Move to edge of circle to avoid line
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        });
+        ctx.fill();
+        ctx.restore();
+    }
+};
+
 function gameLoop(timestamp) {
     const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
     lastTime = timestamp;
@@ -2622,23 +4093,19 @@ function gameLoop(timestamp) {
 }
 
 function update(dt) {
-    // Update PowerUps
-    if (powerUps.length < 20 && Math.random() < 0.02) spawnPowerUp();
-    
-    for (let i = powerUps.length - 1; i >= 0; i--) {
-        powerUps[i].update(dt);
-        // Simple collision with player
-        const dx = player.x - powerUps[i].x;
-        const dy = player.y - powerUps[i].y;
-        if (Math.sqrt(dx*dx+dy*dy) < player.r + powerUps[i].r) {
-             player.applyPowerUp(powerUps[i].type);
-             AudioSys.playTone(600, 'sine', 0.1, 0.1, 'pickup'); 
-             AudioSys.playTone(900, 'sine', 0.2, 0.1, 'pickup2');
-             powerUps.splice(i, 1);
+    if (!player) return;
+
+    SnowSystem.update(dt);
+
+    if (runResetTimer > 0) {
+        runResetTimer -= dt;
+        if (runResetTimer <= 0) {
+            startRun();
+            return;
         }
     }
 
-    // Update Explosions
+    // Update Explosions (always)
     for (let i = explosions.length - 1; i >= 0; i--) {
         explosions[i].update(dt);
         if (explosions[i].life <= 0) {
@@ -2647,48 +4114,83 @@ function update(dt) {
         }
     }
 
+    // Update Particles (always)
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update(dt);
+        if (particles[i].life <= 0) {
+            particles[i] = particles[particles.length - 1];
+            particles.pop();
+        }
+    }
+
+    if (gameMode !== 'play') {
+        setWaterWarning(null);
+        return;
+    }
+
+    const bossActive = !!(boss && !boss.dead);
+
+    // Update Stage Objectives
+    updateStageObjectives(dt);
+    if (stageState && stageState.mosasaur && !player.dead) stageState.mosasaur.update(dt, player);
+
+    // Update PowerUps (no new spawns during boss fights)
+    if (!bossActive && powerUps.length < 20 && Math.random() < 0.015) spawnPowerUp();
+
+    for (let i = powerUps.length - 1; i >= 0; i--) {
+        powerUps[i].update(dt);
+        if (player.dead) continue;
+
+        const dx = player.x - powerUps[i].x;
+        const dy = player.y - powerUps[i].y;
+        if (Math.sqrt(dx*dx + dy*dy) < player.r + powerUps[i].r) {
+            player.applyPowerUp(powerUps[i].type);
+            AudioSys.playTone(600, 'sine', 0.1, 0.1, 'pickup'); 
+            AudioSys.playTone(900, 'sine', 0.2, 0.1, 'pickup2');
+            powerUps.splice(i, 1);
+            updateHud();
+        }
+    }
+
     if (player.dead) {
+        setWaterWarning(null);
         respawnTimer -= dt;
+        if (runState.lives <= 0) return;
+
         if (respawnTimer <= 0) {
-            player.x = rand(100, CONFIG.mapWidth - 100); 
-            player.y = rand(100, CONFIG.mapHeight - 100);
-            
+            player.x = runState.spawnX;
+            player.y = runState.spawnY;
+
             player.health = player.maxHealth; 
             player.dead = false;
             player.invulnerableTimer = 3.0;
             player.vx = 0; 
             player.vy = 0;
-            
-            // Maintain attributes (No Reset)
-            player.score = Math.floor(player.score * 0.9); // Small score penalty only
-            
+
+            player.score = Math.floor(player.score * 0.9);
+            runState.score = player.score;
+
             document.getElementById('game-over-ui').style.display = 'none';
-            
             AudioSys.resumeMusic();
-            entities.push(player); // Re-add player to game world
+            entities.push(player);
 
             showNotification("Respawned!");
             respawnTimer = 3;
+            updateHud();
         }
         return;
     } else {
         respawnTimer = 3; 
     }
 
-    if (entities.length < 1200) {
-        if (entities.filter(e => e instanceof Shape).length < 800) spawnShape(); 
-        const maxEnemies = 20 + Math.floor(player.level / 2);
+    if (!bossActive && entities.length < 1200) {
+        const desiredShapes = stageState?.def.spawn?.desiredShapes ?? 650;
+        if (entities.filter(e => e instanceof Shape).length < desiredShapes) spawnShape();
+
+        const maxEnemiesBase = stageState?.def.spawn?.maxEnemiesBase ?? 16;
+        const maxEnemiesPerLevel = stageState?.def.spawn?.maxEnemiesPerLevel ?? 0.35;
+        const maxEnemies = Math.max(4, Math.floor(maxEnemiesBase + (player.level * maxEnemiesPerLevel)));
         if (entities.filter(e => e instanceof Dino && !e.isPlayer && !e.isBoss).length < maxEnemies) spawnEnemy();
-    }
-    
-    bossTimer += dt;
-    if (bossTimer > 60 && !boss) {
-        if (Math.random() < 0.005) { spawnBoss(); bossTimer = 0; }
-    }
-    if (boss && boss.dead) {
-        boss = null;
-        document.getElementById('boss-bar-container').style.display = 'none';
-        showNotification("Guardian Defeated!");
     }
 
     // Update Entities
@@ -2697,15 +4199,6 @@ function update(dt) {
         if (entities[i].dead) {
             entities[i] = entities[entities.length - 1];
             entities.pop();
-        }
-    }
-
-    // Update Particles
-    for (let i = particles.length - 1; i >= 0; i--) {
-        particles[i].update(dt);
-        if (particles[i].life <= 0) {
-            particles[i] = particles[particles.length - 1];
-            particles.pop();
         }
     }
 
@@ -2732,6 +4225,10 @@ function update(dt) {
     }
 
     entities = entities.filter(e => !e.dead);
+
+    if (boss && boss.dead) {
+        handleBossDefeated();
+    }
     
     camera.x += (player.x - (width / 2 / camera.zoom) - camera.x) * 0.1;
     camera.y += (player.y - (height / 2 / camera.zoom) - camera.y) * 0.1;
@@ -2825,6 +4322,7 @@ function draw() {
 
     drawTerrain(ctx, viewX, viewY, viewW, viewH);
     drawGrid();
+    drawStageObjectives(ctx, viewX, viewY, viewW, viewH);
 
     explosions.forEach(ex => ex.draw(ctx));
 
@@ -2900,17 +4398,7 @@ function draw() {
 
     ctx.restore();
     
-    if (player.dead) {
-        ctx.fillStyle = 'rgba(0,0,0,0.5)';
-        ctx.fillRect(0, 0, width, height);
-        ctx.fillStyle = 'white';
-        ctx.font = '40px Ubuntu';
-        ctx.textAlign = 'center';
-        ctx.fillText("YOU DIED", width/2, height/2);
-        
-        ctx.font = '24px Ubuntu';
-        ctx.fillText("Respawning in " + Math.ceil(respawnTimer) + "...", width/2, height/2 + 40);
-    }
+    SnowSystem.draw(ctx);
 }
 
 function drawGrid() {
@@ -2931,13 +4419,15 @@ function drawGrid() {
     }
     ctx.stroke();
     
-    ctx.fillStyle = 'rgba(20, 20, 50, 0.3)';
-    ctx.beginPath();
-    ctx.arc(CONFIG.mapWidth/2, CONFIG.mapHeight/2, CONFIG.nestRadius, 0, Math.PI*2);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(50, 50, 100, 0.5)';
-    ctx.lineWidth = 5;
-    ctx.stroke();
+    if (bossArena && boss && !boss.dead) {
+        ctx.fillStyle = 'rgba(80, 0, 80, 0.12)';
+        ctx.beginPath();
+        ctx.arc(bossArena.x, bossArena.y, bossArena.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 0, 120, 0.35)';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+    }
     
     ctx.strokeStyle = '#444'; ctx.lineWidth = 20;
     ctx.strokeRect(0, 0, CONFIG.mapWidth, CONFIG.mapHeight);
@@ -2952,11 +4442,52 @@ function drawMinimap() {
     
     mCtx.fillStyle = 'rgba(30, 30, 30, 0.8)';
     mCtx.fillRect(0,0,200,200);
-    
-    mCtx.fillStyle = 'rgba(50,50,100,0.5)';
-    mCtx.beginPath();
-    mCtx.arc(100, 100, CONFIG.nestRadius * scale, 0, Math.PI*2);
-    mCtx.fill();
+
+    // Boss arena hint
+    if (bossArena && boss && !boss.dead) {
+        mCtx.strokeStyle = 'rgba(255, 0, 100, 0.25)';
+        mCtx.lineWidth = 2;
+        mCtx.beginPath();
+        mCtx.arc(bossArena.x * scale, bossArena.y * scale, bossArena.r * scale, 0, Math.PI * 2);
+        mCtx.stroke();
+    }
+
+    // Objectives (fog-of-war reveal)
+    if (stageState && player) {
+        const jewelReveal = (stageState.def && stageState.def.minimapReveal) ? stageState.def.minimapReveal.jewel : 800;
+        const gateReveal = (stageState.def && stageState.def.minimapReveal) ? stageState.def.minimapReveal.gate : 900;
+
+        stageState.jewels.forEach(j => {
+            const d = Math.hypot(player.x - j.x, player.y - j.y);
+            if (d > jewelReveal) return;
+            mCtx.fillStyle = j.jewelType.color;
+            mCtx.beginPath();
+            mCtx.arc(j.x * scale, j.y * scale, 3.2, 0, Math.PI * 2);
+            mCtx.fill();
+        });
+
+        if (stageState.gate) {
+            const g = stageState.gate;
+            const d = Math.hypot(player.x - g.x, player.y - g.y);
+            if (d <= gateReveal || g.unlocked) {
+                mCtx.fillStyle = g.unlocked ? '#7bffb3' : '#aaaaaa';
+                mCtx.beginPath();
+                mCtx.rect(g.x * scale - 3, g.y * scale - 3, 6, 6);
+                mCtx.fill();
+            }
+        }
+
+        if (stageState.artifact) {
+            const a = stageState.artifact;
+            const d = Math.hypot(player.x - a.x, player.y - a.y);
+            if (d <= gateReveal) {
+                mCtx.fillStyle = '#ff66ff';
+                mCtx.beginPath();
+                mCtx.arc(a.x * scale, a.y * scale, 3.5, 0, Math.PI * 2);
+                mCtx.fill();
+            }
+        }
+    }
 
     entities.forEach(e => {
         if (e instanceof Shape && e.type !== 'alpha_fossil' && e.type !== 'amber') return; 
@@ -3061,7 +4592,10 @@ function updateUpgradeUi() {
     });
 }
 
-function checkClassUpgrades() {
+function checkWeaponUpgrades() {
+    if (!player || player.dead) return;
+    if (gameMode !== 'play') return;
+
     const menu = document.getElementById('class-upgrade-menu');
     menu.innerHTML = '';
     
@@ -3076,34 +4610,19 @@ function checkClassUpgrades() {
 
     if (targetMilestone === 0) return;
 
-    let options = [];
-    
-    if (targetMilestone === 15) {
-        options = UPGRADE_TREE[15];
-    }
-    else if (targetMilestone === 30) {
-        if (UPGRADE_TREE[30][player.className]) {
-            options = [...UPGRADE_TREE[30][player.className]];
-        }
-        options.push(MUTATIONS[0]); 
-        options.push(MUTATIONS[1]); 
-    }
-    else if (targetMilestone === 45) {
-        if (UPGRADE_TREE[45][player.className]) {
-            options = [...UPGRADE_TREE[45][player.className]];
-        }
-        options.push(MUTATIONS[2]); 
-        options.push(MUTATIONS[3]); 
-    }
-    else {
-        // Post level 45, random mutations
-        const pool = [...MUTATIONS];
-        for(let i=0; i<3; i++) {
-            if (pool.length === 0) break;
-            const idx = Math.floor(Math.random() * pool.length);
-            options.push(pool[idx]);
-            pool.splice(idx, 1);
-        }
+    // Weapon upgrades only (species changes happen only after boss fights)
+    const options = [];
+    let pool = [...MUTATIONS];
+
+    // Early milestones bias toward core weapon grafts.
+    if (targetMilestone === 15) pool = pool.slice(0, 5);
+    if (targetMilestone === 30) pool = pool.slice(0, 6);
+
+    for (let i = 0; i < 3; i++) {
+        if (pool.length === 0) break;
+        const idx = Math.floor(Math.random() * pool.length);
+        options.push(pool[idx]);
+        pool.splice(idx, 1);
     }
 
     if (!options || options.length === 0) {
@@ -3124,25 +4643,14 @@ function checkClassUpgrades() {
     const centerOffX = (cellW - size) / 2;
 
     options.forEach(opt => {
-        const isMutation = typeof opt === 'object';
         const card = document.createElement('div');
-        card.className = isMutation ? 'class-card mutation' : 'class-card';
+        card.className = 'class-card mutation';
         
-        let title = isMutation ? opt.name : CLASS_DEFS[opt].label;
-        let desc = isMutation ? opt.desc : opt;
+        let title = opt.name;
+        let desc = opt.desc;
         
         // Icon Mapping
-        let iconRow = 3, iconCol = 3; // Default (Crown/Skull)
-        
-        if (isMutation) {
-            iconRow = 3; iconCol = 1; // DNA
-        } else {
-            const label = CLASS_DEFS[opt].label;
-            if (label.includes('Twin') || label.includes('Triple') || label.includes('Octo')) { iconRow = 2; iconCol = 1; }
-            else if (label.includes('Rail') || label.includes('Beam') || label.includes('Sniper')) { iconRow = 2; iconCol = 2; }
-            else if (label.includes('Flame') || label.includes('Inferno')) { iconRow = 2; iconCol = 3; }
-            else if (label.includes('Launcher') || label.includes('Cluster') || label.includes('Nuke')) { iconRow = 3; iconCol = 0; }
-        }
+        let iconRow = 3, iconCol = 1; // DNA
         
         const offX = - (iconCol * cellW) - centerOffX;
         const offY = - (iconRow * size);
@@ -3150,33 +4658,52 @@ function checkClassUpgrades() {
         card.innerHTML = `<div class="class-card-icon" style="background-size: ${bgW}px ${bgH}px; background-position: ${offX}px ${offY}px"></div><div class="class-card-title">${title}</div><div class="class-card-desc">${desc}</div>`;
         
         card.onclick = () => {
-            if (isMutation) {
-                opt.action(player);
-                showNotification(`Upgraded: ${opt.name}!`);
-                if (targetMilestone <= 45) player.tier++;
-            } else {
-                player.evolve(opt);
-                showNotification(`Evolved into ${opt}!`);
-            }
+            opt.action(player);
+            showNotification(`Upgraded: ${opt.name}!`);
             
             if (!player.upgradesTaken.includes(targetMilestone)) {
                 player.upgradesTaken.push(targetMilestone);
             }
             
-            saveGame(true);
             menu.innerHTML = '';
             
             // Check again in case multiple milestones were passed at once
-            setTimeout(checkClassUpgrades, 100); 
+            setTimeout(checkWeaponUpgrades, 100); 
         };
         menu.appendChild(card);
     });
 }
 
 function updateHud() {
-    document.getElementById('score-text').innerText = `Score: ${Math.floor(player.score)}`;
+    const stageNum = runState.stageIndex + 1;
+    const stageName = currentStageDef?.name || `Level ${stageNum}`;
+    const jewelText = stageState ? `${stageState.jewelsCollected}/${stageState.jewelTotal}` : `0/0`;
+
+    document.getElementById('score-text').innerText = `Score: ${Math.floor(runState.score)}`;
     document.getElementById('class-text').innerText = `Lvl ${player.level} ${player.className}`;
+    document.getElementById('run-text').innerText = `${stageName} (${stageNum}/${RUN_CONFIG.totalStages}) • Lives ${runState.lives}/${RUN_CONFIG.maxLives}`;
     document.getElementById('xp-bar-fill').style.width = `${Math.min(100, (player.xp / player.maxXp) * 100)}%`;
+
+    // Crystal HUD
+    const crystalHud = document.getElementById('crystal-hud');
+    if (crystalHud && stageState) {
+        crystalHud.innerHTML = '';
+        for(let i=0; i<stageState.jewelTotal; i++) {
+            const slot = document.createElement('div');
+            const filled = i < stageState.jewelsCollected;
+            slot.className = filled ? 'crystal-slot filled' : 'crystal-slot';
+            
+            const type = JEWEL_TYPES[i % JEWEL_TYPES.length];
+            
+            const icon = document.createElement('div');
+            icon.className = 'crystal-icon';
+            icon.style.backgroundColor = type.color;
+            icon.style.color = type.color;
+            
+            slot.appendChild(icon);
+            crystalHud.appendChild(slot);
+        }
+    }
 }
 
 function updateBossBar() {
@@ -3199,10 +4726,10 @@ function showNotification(text) {
 }
 
 function resetGame() {
-    if (confirm("Are you sure you want to delete your save and restart from Level 1?")) {
-        localStorage.removeItem('dino_io_save');
-        location.reload();
-    }
+    if (!confirm("Restart the run from Level 1?")) return;
+    localStorage.removeItem('dino_io_save');
+    hideOverlays();
+    startRun();
 }
 </script>
 </body>
